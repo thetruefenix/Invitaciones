@@ -31,20 +31,52 @@
           <p class="section-kicker">RSVP</p>
           <h2>Confirma aca</h2>
           <p class="section-copy">
-            Confírmanos tu asistencia para acompañarnos en este día tan especial.
+            Déjanos tus datos y tu confirmación. La integración está preparada para guardar cada respuesta y avisar por correo.
           </p>
         </div>
-        <div class="registry-card reveal">
-          <div class="registry-actions">
-            <a
-              class="button-link"
-              href="https://www.zola.com/wedding/gabrielaanddiego2027/rsvp"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Ir a confirmar asistencia
-            </a>
-          </div>
+
+        <div class="rsvp-shell reveal">
+          <form class="rsvp-form" id="rsvp-form" novalidate>
+            <label>
+              Nombre
+              <input type="text" name="nombre" autocomplete="given-name" required />
+            </label>
+
+            <label>
+              Apellido
+              <input type="text" name="apellido" autocomplete="family-name" required />
+            </label>
+
+            <label>
+              Teléfono o correo
+              <input type="text" name="contacto" autocomplete="email" required />
+            </label>
+
+            <label>
+              ¿Confirmas asistencia?
+              <select name="confirmacion" required>
+                <option value="">Selecciona una opción</option>
+                <option value="Sí, asistiré">Sí, asistiré</option>
+                <option value="No podré asistir">No podré asistir</option>
+              </select>
+            </label>
+
+            <label>
+              Mensaje adicional
+              <textarea name="mensaje" rows="4" placeholder="Opcional"></textarea>
+            </label>
+
+            <button type="submit" class="button-link">Enviar confirmación</button>
+            <p class="form-note">Las respuestas pueden guardarse en Google Sheets y generar una notificación a `diego.alvaradozarate@gmail.com`.</p>
+            <p class="form-status" id="rsvp-status" aria-live="polite"></p>
+          </form>
+
+          <aside class="rsvp-help">
+            <h3>Qué guarda esta integración</h3>
+            <p>Nombre, apellido, contacto, confirmación, mensaje y fecha de registro.</p>
+            <h3>Cómo se notifica</h3>
+            <p>La integración propuesta envía un correo a `diego.alvaradozarate@gmail.com` cada vez que alguien confirma.</p>
+          </aside>
         </div>
       </section>
     </main>
@@ -54,6 +86,7 @@
       <p>Gabriela & Diego</p>
     </footer>
 
+    <script src="../rsvp-config.js"></script>
     <script src="../script.js"></script>
   </body>
 </html>

@@ -1,0 +1,115 @@
+const SHEET_NAME = "Invitados";
+const NOTIFICATION_EMAIL = "diego.alvaradozarate@gmail.com";
+
+function doPost(e) {
+  try {
+    const payload = JSON.parse(e.postData.contents || "{}");
+    const normalized = normalizePayload_(payload);
+    const sheet = getSheet_();
+
+    sheet.appendRow([
+      new Date(),
+      normalized.nombre,
+      normalized.apellido,
+      normalized.contacto,
+      normalized.confirmacion,
+      normalized.mensaje,
+      normalized.source,
+    ]);
+
+    sendNotification_(normalized);
+
+    return jsonResponse_({
+      ok: true,
+      message: "Confirmacion guardada correctamente.",
+    });
+  } catch (error) {
+    return jsonResponse_({
+      ok: false,
+      message: error.message || "No fue posible guardar la confirmacion.",
+    });
+  }
+}
+
+function doGet() {
+  return jsonResponse_({
+    ok: true,
+    message: "RSVP endpoint activo.",
+  });
+}
+
+function getSheet_() {
+  const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = spreadsheet.getSheetByName(SHEET_NAME);
+
+  if (!sheet) {
+    sheet = spreadsheet.insertSheet(SHEET_NAME);
+    sheet.appendRow([
+      "Fecha registro",
+      "Nombre",
+      "Apellido",
+      "Contacto",
+      "Confirmacion",
+      "Mensaje",
+      "Origen",
+    ]);
+  }
+
+  return sheet;
+}
+
+function normalizePayload_(payload) {
+  const nombre = String(payload.nombre || "").trim();
+  const apellido = String(payload.apellido || "").trim();
+  const contacto = String(payload.contacto || "").trim();
+  const confirmacion = String(payload.confirmacion || "").trim();
+  const mensaje = String(payload.mensaje || "").trim();
+  const source = String(payload.source || "website").trim();
+
+  if (!nombre) {
+    throw new Error("Falta el nombre.");
+  }
+
+  if (!apellido) {
+    throw new Error("Falta el apellido.");
+  }
+
+  if (!contacto) {
+    throw new Error("Falta el contacto.");
+  }
+
+  if (!confirmacion) {
+    throw new Error("Falta la confirmacion.");
+  }
+
+  return {
+    nombre,
+    apellido,
+    contacto,
+    confirmacion,
+    mensaje,
+    source,
+  };
+}
+
+function sendNotification_(data) {
+  const subject = "Nueva confirmacion de invitado: " + data.nombre + " " + data.apellido;
+  const body = [
+    "Se registro una nueva respuesta en la invitacion.",
+    "",
+    "Nombre: " + data.nombre,
+    "Apellido: " + data.apellido,
+    "Contacto: " + data.contacto,
+    "Confirmacion: " + data.confirmacion,
+    "Mensaje: " + (data.mensaje || "(sin mensaje)"),
+    "Origen: " + data.source,
+  ].join("\n");
+
+  GmailApp.sendEmail(NOTIFICATION_EMAIL, subject, body);
+}
+
+function jsonResponse_(payload) {
+  return ContentService.createTextOutput(JSON.stringify(payload)).setMimeType(
+    ContentService.MimeType.JSON
+  );
+}

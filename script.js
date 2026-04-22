@@ -47,6 +47,9 @@ if (parts.days && parts.hours && parts.minutes && parts.seconds) {
 const topbar = document.querySelector(".topbar");
 const reveals = document.querySelectorAll(".reveal");
 const currentPage = document.body.dataset.page;
+const rsvpForm = document.getElementById("rsvp-form");
+const rsvpStatus = document.getElementById("rsvp-status");
+const rsvpEndpoint = window.RSVP_CONFIG?.endpoint || "";
 
 document.querySelectorAll("[data-nav]").forEach((link) => {
   if (link.dataset.nav === currentPage) {
@@ -83,3 +86,72 @@ const observer = new IntersectionObserver(
 reveals.forEach((element) => observer.observe(element));
 updateTopbar();
 window.addEventListener("scroll", updateTopbar, { passive: true });
+
+async function submitRsvp(event) {
+  event.preventDefault();
+
+  if (!rsvpForm || !rsvpStatus) {
+    return;
+  }
+
+  const formData = new FormData(rsvpForm);
+  const payload = {
+    nombre: String(formData.get("nombre") || "").trim(),
+    apellido: String(formData.get("apellido") || "").trim(),
+    contacto: String(formData.get("contacto") || "").trim(),
+    confirmacion: String(formData.get("confirmacion") || "").trim(),
+    mensaje: String(formData.get("mensaje") || "").trim(),
+    source: window.location.href,
+  };
+
+  if (!payload.nombre || !payload.apellido || !payload.contacto || !payload.confirmacion) {
+    rsvpStatus.textContent = "Completa nombre, apellido, contacto y confirmación.";
+    rsvpStatus.dataset.state = "error";
+    return;
+  }
+
+  if (!rsvpEndpoint) {
+    rsvpStatus.textContent = "Falta configurar el endpoint del RSVP en rsvp-config.js.";
+    rsvpStatus.dataset.state = "error";
+    return;
+  }
+
+  const submitButton = rsvpForm.querySelector('button[type="submit"]');
+
+  if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.textContent = "Enviando...";
+  }
+
+  try {
+    const response = await fetch(rsvpEndpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || !result.ok) {
+      throw new Error(result.message || "No fue posible enviar la confirmación.");
+    }
+
+    rsvpStatus.textContent = "Confirmación enviada correctamente.";
+    rsvpStatus.dataset.state = "success";
+    rsvpForm.reset();
+  } catch (error) {
+    rsvpStatus.textContent = error.message || "Ocurrió un error al enviar la confirmación.";
+    rsvpStatus.dataset.state = "error";
+  } finally {
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.textContent = "Enviar confirmación";
+    }
+  }
+}
+
+if (rsvpForm) {
+  rsvpForm.addEventListener("submit", submitRsvp);
+}
