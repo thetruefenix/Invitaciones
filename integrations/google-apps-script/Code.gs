@@ -3,7 +3,7 @@ const NOTIFICATION_EMAIL = "diego.alvaradozarate@gmail.com";
 
 function doPost(e) {
   try {
-    const payload = JSON.parse(e.postData.contents || "{}");
+    const payload = getPayload_(e);
     const normalized = normalizePayload_(payload);
     const sheet = getSheet_();
 
@@ -29,6 +29,20 @@ function doPost(e) {
       message: error.message || "No fue posible guardar la confirmacion.",
     });
   }
+}
+
+function getPayload_(e) {
+  const contents = e && e.postData ? String(e.postData.contents || "") : "";
+
+  if (contents && contents.trim().startsWith("{")) {
+    return JSON.parse(contents);
+  }
+
+  if (e && e.parameter) {
+    return e.parameter;
+  }
+
+  return {};
 }
 
 function doGet() {

@@ -124,17 +124,22 @@ async function submitRsvp(event) {
   }
 
   try {
+    const body = new URLSearchParams(payload);
     const response = await fetch(rsvpEndpoint, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
+      body,
     });
 
-    const result = await response.json();
+    const raw = await response.text();
+    let result = {};
 
-    if (!response.ok || !result.ok) {
+    try {
+      result = JSON.parse(raw);
+    } catch {
+      result = { ok: response.ok };
+    }
+
+    if (!response.ok || result.ok === false) {
       throw new Error(result.message || "No fue posible enviar la confirmación.");
     }
 
