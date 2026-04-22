@@ -125,33 +125,24 @@ async function submitRsvp(event) {
   }
 
   const submitButton = rsvpForm.querySelector('button[type="submit"]');
+  const sourceField = rsvpForm.querySelector('input[name="source"]');
 
   if (submitButton) {
     submitButton.disabled = true;
     submitButton.textContent = "Enviando...";
   }
 
+  if (sourceField) {
+    sourceField.value = window.location.href;
+  }
+
+  rsvpForm.action = rsvpEndpoint;
+  rsvpForm.method = "POST";
+  rsvpForm.target = "rsvp-hidden-frame";
+
   try {
-    const body = new URLSearchParams(payload);
-    const response = await fetch(rsvpEndpoint, {
-      method: "POST",
-      body,
-    });
-
-    const raw = await response.text();
-    let result = {};
-
-    try {
-      result = JSON.parse(raw);
-    } catch {
-      result = { ok: response.ok };
-    }
-
-    if (!response.ok || result.ok === false) {
-      throw new Error(result.message || "No fue posible enviar la confirmación.");
-    }
-
-    rsvpStatus.textContent = "Confirmación enviada correctamente.";
+    rsvpForm.submit();
+    rsvpStatus.textContent = "Confirmación enviada. Si no ves cambios en unos segundos, revisa la hoja de Google y tu correo.";
     rsvpStatus.dataset.state = "success";
     rsvpForm.reset();
   } catch (error) {

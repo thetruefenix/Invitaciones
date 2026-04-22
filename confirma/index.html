@@ -71,10 +71,12 @@
               <textarea name="mensaje" rows="4" placeholder="Opcional"></textarea>
             </label>
 
+            <input type="hidden" name="source" value="" />
             <button type="submit" class="button-link">Enviar confirmación</button>
             <p class="form-note">Las respuestas se envían al registro de invitados y notifican a diego.alvaradozarate@gmail.com.</p>
             <p class="form-status" id="rsvp-status" aria-live="polite"></p>
           </form>
+          <iframe name="rsvp-hidden-frame" id="rsvp-hidden-frame" hidden></iframe>
 
           <aside class="rsvp-help">
             <h3>Qué guarda esta integración</h3>
