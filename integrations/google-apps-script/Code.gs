@@ -1,4 +1,5 @@
-const SHEET_NAME = "Invitados";
+const SHEET_NAME = "Invitados boda Gabriela y Diego";
+const SPREADSHEET_ID = "18HS4Qgr8cHfq0giMguXakp6fQrFIX1Jkjirlwajq_ig";
 const NOTIFICATION_EMAIL = "diego.alvaradozarate@gmail.com";
 
 function doPost(e) {
@@ -31,6 +32,13 @@ function doPost(e) {
   }
 }
 
+function doGet() {
+  return jsonResponse_({
+    ok: true,
+    message: "RSVP endpoint activo.",
+  });
+}
+
 function getPayload_(e) {
   const contents = e && e.postData ? String(e.postData.contents || "") : "";
 
@@ -45,15 +53,8 @@ function getPayload_(e) {
   return {};
 }
 
-function doGet() {
-  return jsonResponse_({
-    ok: true,
-    message: "RSVP endpoint activo.",
-  });
-}
-
 function getSheet_() {
-  const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
   let sheet = spreadsheet.getSheetByName(SHEET_NAME);
 
   if (!sheet) {
