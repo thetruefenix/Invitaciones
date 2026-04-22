@@ -1,5 +1,4 @@
 const SHEET_NAME = "Invitados boda Gabriela y Diego";
-const SPREADSHEET_ID = "18HS4Qgr8cHfq0giMguXakp6fQrFIX1Jkjirlwajq_ig";
 const NOTIFICATION_EMAIL = "diego.alvaradozarate@gmail.com";
 
 function doPost(e) {
@@ -55,7 +54,12 @@ function getPayload_(e) {
 }
 
 function getSheet_() {
-  const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+
+  if (!spreadsheet) {
+    throw new Error("No hay una hoja activa vinculada a este proyecto.");
+  }
+
   let sheet = spreadsheet.getSheetByName(SHEET_NAME);
 
   if (!sheet) {
