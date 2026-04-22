@@ -98,14 +98,22 @@ async function submitRsvp(event) {
   const payload = {
     nombre: String(formData.get("nombre") || "").trim(),
     apellido: String(formData.get("apellido") || "").trim(),
-    contacto: String(formData.get("contacto") || "").trim(),
+    telefono: String(formData.get("telefono") || "").trim(),
+    correo: String(formData.get("correo") || "").trim(),
     confirmacion: String(formData.get("confirmacion") || "").trim(),
     mensaje: String(formData.get("mensaje") || "").trim(),
     source: window.location.href,
   };
 
-  if (!payload.nombre || !payload.apellido || !payload.contacto || !payload.confirmacion) {
-    rsvpStatus.textContent = "Completa nombre, apellido, contacto y confirmación.";
+  if (!payload.nombre || !payload.apellido || !payload.telefono || !payload.correo || !payload.confirmacion) {
+    rsvpStatus.textContent = "Completa nombre, apellido, teléfono, correo y confirmación.";
+    rsvpStatus.dataset.state = "error";
+    return;
+  }
+
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(payload.correo)) {
+    rsvpStatus.textContent = "Ingresa un correo válido.";
     rsvpStatus.dataset.state = "error";
     return;
   }

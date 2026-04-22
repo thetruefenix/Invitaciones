@@ -12,7 +12,8 @@ function doPost(e) {
       new Date(),
       normalized.nombre,
       normalized.apellido,
-      normalized.contacto,
+      normalized.telefono,
+      normalized.correo,
       normalized.confirmacion,
       normalized.mensaje,
       normalized.source,
@@ -63,7 +64,8 @@ function getSheet_() {
       "Fecha registro",
       "Nombre",
       "Apellido",
-      "Contacto",
+      "Telefono",
+      "Correo",
       "Confirmacion",
       "Mensaje",
       "Origen",
@@ -76,7 +78,8 @@ function getSheet_() {
 function normalizePayload_(payload) {
   const nombre = String(payload.nombre || "").trim();
   const apellido = String(payload.apellido || "").trim();
-  const contacto = String(payload.contacto || "").trim();
+  const telefono = String(payload.telefono || "").trim();
+  const correo = String(payload.correo || "").trim();
   const confirmacion = String(payload.confirmacion || "").trim();
   const mensaje = String(payload.mensaje || "").trim();
   const source = String(payload.source || "website").trim();
@@ -89,8 +92,12 @@ function normalizePayload_(payload) {
     throw new Error("Falta el apellido.");
   }
 
-  if (!contacto) {
-    throw new Error("Falta el contacto.");
+  if (!telefono) {
+    throw new Error("Falta el telefono.");
+  }
+
+  if (!correo) {
+    throw new Error("Falta el correo.");
   }
 
   if (!confirmacion) {
@@ -100,7 +107,8 @@ function normalizePayload_(payload) {
   return {
     nombre,
     apellido,
-    contacto,
+    telefono,
+    correo,
     confirmacion,
     mensaje,
     source,
@@ -114,7 +122,8 @@ function sendNotification_(data) {
     "",
     "Nombre: " + data.nombre,
     "Apellido: " + data.apellido,
-    "Contacto: " + data.contacto,
+    "Telefono: " + data.telefono,
+    "Correo: " + data.correo,
     "Confirmacion: " + data.confirmacion,
     "Mensaje: " + (data.mensaje || "(sin mensaje)"),
     "Origen: " + data.source,

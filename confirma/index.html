@@ -49,12 +49,12 @@
 
             <label>
               Teléfono
-              <input type="text" name="contacto" autocomplete="email" required />
+              <input type="tel" name="telefono" autocomplete="tel" required />
             </label>
 
             <label>
-              correo
-              <input type="text" name="contacto" autocomplete="email" required />
+              Correo
+              <input type="email" name="correo" autocomplete="email" required />
             </label>
 
             <label>
@@ -72,15 +72,15 @@
             </label>
 
             <button type="submit" class="button-link">Enviar confirmación</button>
-            <p class="form-note">Las respuestas pueden guardarse en Google Sheets y generar una notificación a `diego.alvaradozarate@gmail.com`.</p>
+            <p class="form-note">Las respuestas se envían al registro de invitados y notifican a diego.alvaradozarate@gmail.com.</p>
             <p class="form-status" id="rsvp-status" aria-live="polite"></p>
           </form>
 
           <aside class="rsvp-help">
             <h3>Qué guarda esta integración</h3>
-            <p>Nombre, apellido, contacto, confirmación, mensaje y fecha de registro.</p>
+            <p>Nombre, apellido, teléfono, correo, confirmación, mensaje y fecha de registro.</p>
             <h3>Cómo se notifica</h3>
-            <p>La integración propuesta envía un correo a `diego.alvaradozarate@gmail.com` cada vez que alguien confirma.</p>
+            <p>Se envía un correo a diego.alvaradozarate@gmail.com cada vez que alguien confirma.</p>
           </aside>
         </div>
       </section>
