@@ -201,7 +201,7 @@ main,
     width: 100vw;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
-    padding: 2rem 0 4.5rem;
+    padding: 0 0 4.5rem;
 }
 
 .hero-marquee {
