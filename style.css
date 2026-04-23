@@ -32,6 +32,10 @@ iframe {
     width: 100%;
 }
 
+[hidden] {
+    display: none !important;
+}
+
 img {
     height: 100%;
     object-fit: cover;
@@ -573,6 +577,94 @@ main,
     border-top: 1px solid var(--line);
 }
 
+.rsvp-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+    gap: 1.5rem;
+}
+
+.rsvp-form,
+.rsvp-help {
+    background: rgba(255, 255, 255, 0.42);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+}
+
+.rsvp-form {
+    display: grid;
+    gap: 1rem;
+}
+
+.rsvp-form label {
+    display: grid;
+    gap: 0.45rem;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.rsvp-form input,
+.rsvp-form select,
+.rsvp-form textarea {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--line-strong);
+    background: rgba(255, 255, 255, 0.85);
+    color: var(--text);
+    font: inherit;
+}
+
+.rsvp-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.rsvp-form .button-link {
+    width: 100%;
+    cursor: pointer;
+}
+
+.rsvp-form .button-link[disabled] {
+    opacity: 0.7;
+    cursor: wait;
+}
+
+.rsvp-help h3 {
+    margin: 0 0 0.75rem;
+    font-family: "Libre Baskerville", Georgia, serif;
+    font-size: 1.1rem;
+}
+
+.rsvp-help p,
+.form-note,
+.form-status {
+    margin: 0;
+    font-family: "Libre Baskerville", Georgia, serif;
+    line-height: 1.7;
+}
+
+.rsvp-help {
+    display: grid;
+    align-content: start;
+    gap: 1rem;
+}
+
+.form-note {
+    font-size: 0.92rem;
+}
+
+.form-status {
+    min-height: 1.5rem;
+}
+
+.form-status[data-state="success"] {
+    color: #24593a;
+}
+
+.form-status[data-state="error"] {
+    color: #8a2b2b;
+}
+
 .reveal {
     opacity: 0;
     transform: translateY(24px);
@@ -638,10 +730,6 @@ main,
     }
 
     .index-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .rsvp-shell {
         grid-template-columns: 1fr;
     }
 
@@ -736,6 +824,16 @@ main,
     .registry-section,
     .confirm-section {
         padding: 1rem 0 3rem;
+    }
+
+    .rsvp-shell {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .rsvp-form,
+    .rsvp-help {
+        padding: 1rem;
     }
 
     .registry-card {

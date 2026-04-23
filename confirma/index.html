@@ -34,18 +34,58 @@
             Conf&iacute;rmanos tu asistencia para acompa&ntilde;arnos en este d&iacute;a tan especial.
           </p>
         </div>
-        <div class="registry-card reveal">
-          <div class="registry-actions">
-            <a
-              class="button-link"
-              href="https://forms.gle/2sYwYmioqXg4SFHs5"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Ir a confirmar asistencia
-            </a>
+        <div class="rsvp-shell reveal">
+          <form class="rsvp-form" id="rsvpForm" method="post" target="rsvp-submit-frame" novalidate>
+            <input type="hidden" name="source" value="website" />
+
+            <label>
+              Nombre
+              <input type="text" name="nombre" autocomplete="given-name" required />
+            </label>
+
+            <label>
+              Apellido
+              <input type="text" name="apellido" autocomplete="family-name" required />
+            </label>
+
+            <label>
+              Tel&eacute;fono
+              <input type="tel" name="telefono" autocomplete="tel" required />
+            </label>
+
+            <label>
+              Correo
+              <input type="email" name="correo" autocomplete="email" required />
+            </label>
+
+            <label>
+              &iquest;Confirmas asistencia?
+              <select name="confirmacion" required>
+                <option value="">Selecciona una opci&oacute;n</option>
+                <option value="Si, asistire">S&iacute;, asistir&eacute;</option>
+                <option value="No podre asistir">No podr&eacute; asistir</option>
+              </select>
+            </label>
+
+            <label>
+              Mensaje adicional
+              <textarea name="mensaje" rows="4" placeholder="Opcional"></textarea>
+            </label>
+
+            <button class="button-link" type="submit" id="rsvpSubmitButton">
+              Enviar confirmaci&oacute;n
+            </button>
+            <p class="form-status" id="rsvpStatus" aria-live="polite"></p>
+          </form>
+
+          <div class="rsvp-help">
+            <h3>Nos har&iacute;a muy felices verte all&iacute;</h3>
+            <p>
+              Cada persona que nos acompa&ntilde;a forma parte de esta historia, y tu presencia har&aacute; este d&iacute;a todav&iacute;a m&aacute;s especial para nosotros.
+            </p>
           </div>
         </div>
+        <iframe name="rsvp-submit-frame" id="rsvpSubmitFrame" hidden title="Envio RSVP"></iframe>
       </section>
     </main>
 
@@ -54,6 +94,7 @@
       <p>Gabriela & Diego</p>
     </footer>
 
+    <script src="../rsvp-config.js"></script>
     <script src="../script.js"></script>
   </body>
 </html>
