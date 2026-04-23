@@ -64,7 +64,7 @@ export default function Confirma() {
     <Layout page="confirma" title="Confirma aca | Gabriela & Diego">
       <section className="confirm-section reveal">
         <div className="section-heading">
-          <h2>Confirma aca</h2>
+          <h2>Confirma acá</h2>
           <p className="section-copy">
             Confírmanos tu asistencia para acompañarnos en este día tan especial.
           </p>
@@ -104,7 +104,7 @@ export default function Confirma() {
 
             <label>
               ¿Confirmas asistencia?
-              <select name="confirmacion" required defaultValue="">
+              <select name="confirmación" required defaultValue="">
                 <option value="">Selecciona una opción</option>
                 <option value="Si, asistire">Sí, asistiré</option>
                 <option value="No podre asistir">No podré asistir</option>
@@ -131,7 +131,7 @@ export default function Confirma() {
           <div className="rsvp-help">
             <h3>Nos haría muy felices verte allá</h3>
             <p>
-              Cada persona que nos acompaña forma parte de esta historia, y tu presencia harí este
+              Cada persona que nos acompaña forma parte de esta historia, y tu presencia haría este
               día todavía más especial para nosotros.
             </p>
           </div>
