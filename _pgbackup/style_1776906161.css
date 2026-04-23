@@ -4,7 +4,7 @@
     --text: #4e4e4e;
     --line: #e8e0d8;
     --line-strong: #d9cdc2;
-    --shadow: 0 30px 70px rgba(78, 78, 78, 0.08);
+    --shadow: 0 300px 70px rgba(78, 78, 78, 0.08);
 }
 
 * {
@@ -194,22 +194,37 @@ main,
 }
 
 .hero {
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
     padding: 2rem 0 4.5rem;
 }
 
 .hero-marquee {
     position: relative;
     overflow: hidden;
-    min-height: min(90vh, 980px);
-    height: min(90vh, 980px);
+    aspect-ratio: 12 / 6.2;
     margin-bottom: 0;
     background: #f9f9f9;
 }
 
+.hero-marquee::before,
+.hero-marquee::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 6rem;
+    z-index: 2;
+    pointer-events: none;
+}
 
+.hero-marquee::before {
+    left: 0;
+    background: linear-gradient(90deg, rgba(247, 245, 242, 0.9), rgba(247, 245, 242, 0));
+}
+
+.hero-marquee::after {
+    right: 0;
+    background: linear-gradient(270deg, rgba(247, 245, 242, 0.9), rgba(247, 245, 242, 0));
+}
 
 .marquee-track {
     display: flex;
@@ -217,12 +232,12 @@ main,
     width: max-content;
     min-width: max-content;
     will-change: transform;
-    animation: marqueeSlide 80s linear infinite;
+    animation: marqueeSlide 26s linear infinite;
 }
 
 .hero-tile {
     flex: 0 0 auto;
-    width: auto;
+    width: min(32vw, 340px);
     height: 100%;
     margin: 0;
     overflow: hidden;
@@ -257,10 +272,12 @@ main,
 
 .hero-tile img {
     height: 100%;
-    width: auto;
-    max-width: none;
     object-fit: contain;
     object-position: center;
+}
+
+.hero-marquee:hover .marquee-track {
+    animation-play-state: paused;
 }
 
 .hero-photo-a,
@@ -289,7 +306,6 @@ main,
 
 .hero-copy {
     position: relative;
-    width: min(1180px, calc(100% - 2rem));
     max-width: 760px;
     margin: 0 auto;
     text-align: center;
@@ -325,7 +341,6 @@ main,
     font-size: clamp(3.6rem, 7vw, 6rem);
     line-height: 1.18;
     color: var(--text);
-    white-space: nowrap;
 }
 
 .ampersand,
@@ -335,14 +350,14 @@ main,
 .embed-note,
 .footer p {
     margin: 0;
-    font-weight: 400;
+    line-height: 1.7;
 }
 
 .ampersand {
     margin: 0.75rem 0;
-    font-family: "Pinyon Script", cursive;
-    font-size: clamp(3.8rem, 6vw, 5.6rem);
-    line-height: 1;
+    font-family: "Libre Baskerville", Georgia, serif;
+    font-size: 1rem;
+    text-transform: lowercase;
 }
 
 .date-location-row {
@@ -642,7 +657,7 @@ main,
     }
 
     .hero-tile {
-        width: auto;
+        width: min(56vw, 320px);
     }
 
     .hero-copy {
@@ -857,3 +872,6 @@ main,
         font-size: clamp(3.4rem, 12vw, 5.4rem);
     }
 }
+
+
+

@@ -1,4 +1,4 @@
-const weddingDate = new Date("2027-02-11T16:30:00-03:00");
+﻿const weddingDate = new Date("2027-02-11T16:30:00-03:00");
 
 const parts = {
   days: document.getElementById("days"),
@@ -47,6 +47,34 @@ if (parts.days && parts.hours && parts.minutes && parts.seconds) {
 const topbar = document.querySelector(".topbar");
 const reveals = document.querySelectorAll(".reveal");
 const currentPage = document.body.dataset.page;
+const isIntroPage = document.body.classList.contains("intro-message-page");
+const introShell = document.querySelector(".intro-message-shell");
+
+function goToHome() {
+  window.location.href = "home/index.html";
+}
+
+if (isIntroPage) {
+  const openIntro = () => {
+    if (document.body.classList.contains("intro-opened")) {
+      return;
+    }
+
+    document.body.classList.add("intro-opened");
+    goToHome();
+  };
+
+  if (introShell) {
+    introShell.addEventListener("click", openIntro);
+  }
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openIntro();
+    }
+  });
+}
 
 document.querySelectorAll("[data-nav]").forEach((link) => {
   if (link.dataset.nav === currentPage) {
@@ -67,19 +95,22 @@ function updateTopbar() {
   topbar.classList.toggle("scrolled", window.scrollY > 10);
 }
 
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-      }
-    });
-  },
-  {
-    threshold: 0.14,
-  }
-);
+if (reveals.length) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+        }
+      });
+    },
+    {
+      threshold: 0.14,
+    }
+  );
 
-reveals.forEach((element) => observer.observe(element));
+  reveals.forEach((element) => observer.observe(element));
+}
+
 updateTopbar();
 window.addEventListener("scroll", updateTopbar, { passive: true });
