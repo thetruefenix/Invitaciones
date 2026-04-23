@@ -3,6 +3,9 @@
     "allow": [
       "Bash(npm install *)",
       "Bash(npm run *)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\sanhu\\Documents\\GitHub\\Invitaciones\\home\\Fotos carrucel"
     ]
   }
 }
