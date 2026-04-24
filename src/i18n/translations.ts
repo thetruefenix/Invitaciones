@@ -77,6 +77,7 @@ type Dict = {
     iframeTitle: string;
   };
   footer: { line1: string; line2: string };
+  guide: { home: string; detalles: string; regalos: string };
   titles: {
     home: string;
     detalles: string;
@@ -180,6 +181,11 @@ export const translations: Record<Lang, Dict> = {
       line1: "For all the days along the way",
       line2: "Gabriela & Diego",
     },
+    guide: {
+      home: "Ver detalles",
+      detalles: "Ver regalos",
+      regalos: "Confirmar asistencia",
+    },
     titles: {
       home: "Home | Gabriela & Diego",
       detalles: "Detalles | Gabriela & Diego",
@@ -282,6 +288,11 @@ export const translations: Record<Lang, Dict> = {
     footer: {
       line1: "For all the days along the way",
       line2: "Gabriela & Diego",
+    },
+    guide: {
+      home: "View details",
+      detalles: "View gifts",
+      regalos: "RSVP",
     },
     titles: {
       home: "Home | Gabriela & Diego",

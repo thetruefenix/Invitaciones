@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import Layout from "../components/Layout";
 import useCountdown from "../hooks/useCountdown";
 import useReveal from "../hooks/useReveal";
@@ -13,11 +14,66 @@ const tiles = [foto1, foto2, foto3, foto4, foto1, foto2, foto3, foto4];
 const ghostTiles = [foto1, foto2, foto3, foto4, foto1, foto2, foto3, foto4];
 const infoLineClass =
   "m-0 max-w-full font-serif text-[clamp(0.78rem,1.35vw,0.98rem)] font-bold tracking-[0.06em] normal-case leading-[1.3] text-text whitespace-nowrap tablet:text-[clamp(0.82rem,3.4vw,1.18rem)] mobile:text-[clamp(0.62rem,2.75vw,0.78rem)]";
+const easeInOutCubic = (progress: number) =>
+  progress < 0.5
+    ? 4 * progress * progress * progress
+    : 1 - Math.pow(-2 * progress + 2, 3) / 2;
 
 export default function Home() {
   const { days, hours, minutes, seconds } = useCountdown(WEDDING_DATE);
   useReveal();
   const { t } = useLang();
+  const summaryRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (prefersReducedMotion) return;
+
+    let cancelled = false;
+    const cancelAutoAdvance = () => {
+      cancelled = true;
+    };
+    let animationFrame = 0;
+    const timer = window.setTimeout(() => {
+      if (cancelled || window.scrollY > 80) return;
+      const target = summaryRef.current;
+      if (!target) return;
+
+      const startY = window.scrollY;
+      const targetY = Math.max(
+        0,
+        target.getBoundingClientRect().top + window.scrollY - 88
+      );
+      const distance = targetY - startY;
+      const duration = 1800;
+      const startTime = performance.now();
+
+      const animateScroll = (now: number) => {
+        if (cancelled) return;
+        const progress = Math.min((now - startTime) / duration, 1);
+        window.scrollTo(0, startY + distance * easeInOutCubic(progress));
+        if (progress < 1) {
+          animationFrame = window.requestAnimationFrame(animateScroll);
+        }
+      };
+
+      animationFrame = window.requestAnimationFrame(animateScroll);
+    }, 5600);
+
+    window.addEventListener("wheel", cancelAutoAdvance, { passive: true });
+    window.addEventListener("touchstart", cancelAutoAdvance, { passive: true });
+    window.addEventListener("keydown", cancelAutoAdvance);
+
+    return () => {
+      window.clearTimeout(timer);
+      window.cancelAnimationFrame(animationFrame);
+      window.removeEventListener("wheel", cancelAutoAdvance);
+      window.removeEventListener("touchstart", cancelAutoAdvance);
+      window.removeEventListener("keydown", cancelAutoAdvance);
+    };
+  }, []);
 
   return (
     <Layout page="home" title={t.titles.home}>
@@ -63,7 +119,10 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="reveal relative w-[min(1180px,calc(100%-2rem))] max-w-[760px] mx-auto text-center pt-[65px] tablet:w-[min(100%-1.25rem,680px)] tablet:pt-6">
+        <div
+          ref={summaryRef}
+          className="reveal scroll-mt-24 relative w-[min(1180px,calc(100%-2rem))] max-w-[760px] mx-auto text-center pt-[65px] tablet:w-[min(100%-1.25rem,680px)] tablet:pt-6"
+        >
           <div className="max-w-full mx-auto">
             <h2 className="m-0 font-script font-normal text-[clamp(2.2rem,4.2vw,3.8rem)] leading-[1.05] text-text whitespace-nowrap tablet:text-[clamp(1.6rem,6vw,2.8rem)] tablet:leading-[1.1] mobile:text-[clamp(1.2rem,7vw,2rem)]">
               Gabriela Herrera Candia
