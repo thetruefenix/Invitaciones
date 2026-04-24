@@ -109,7 +109,7 @@ export default function Detalles() {
               <article className="reveal flex flex-row-reverse tablet:flex-col bg-surface rounded-[2rem] shadow-soft border border-line overflow-hidden">
                 
                 {/* Right Side: Photo Carousel */}
-                <div className="w-1/2 tablet:w-full relative min-h-[450px] tablet:min-h-[350px] mobile:min-h-[280px]" aria-label={t.detalles.celebrationCarouselAria}>
+                <div className="w-1/2 tablet:w-full relative min-h-[450px] tablet:min-h-[350px] mobile:min-h-[280px] overflow-hidden" aria-label={t.detalles.celebrationCarouselAria}>
                   <div
                     className="flex w-full h-full transition-transform duration-[500ms] ease-in-out absolute inset-0"
                     style={{ transform: `translateX(-${celebrationIndex * 100}%)` }}
