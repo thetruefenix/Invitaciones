@@ -174,7 +174,7 @@ export default function Detalles() {
                   <p className={bodyStyle}>{t.detalles.celebrationDesc}</p>
 
                   <div className="flex flex-col xl:flex-row gap-4 mt-8">
-                    <a className={btn} href="https://www.google.com/maps/search/?api=1&query=Pura+Lodge+Callej%C3%B3n+Lagunillas+5385+San+Pedro+de+la+Paz+Chile" target="_blank" rel="noreferrer">
+                    <a className={btn} href="https://maps.app.goo.gl/WTdmvZ7gusrBz3pM9?g_st=ic" target="_blank" rel="noreferrer">
                       {t.detalles.map}
                     </a>
                     <a className={btn} href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Celebraci%C3%B3n%20Gabriela%20y%20Diego&dates=20270211T220000Z/20270212T070000Z&details=Celebraci%C3%B3n%20y%20fiesta&location=Pura%20Lodge%2C%20Callej%C3%B3n%20Lagunillas%205385%2C%20San%20Pedro%20de%20la%20Paz%2C%20Chile" target="_blank" rel="noreferrer">
@@ -186,7 +186,7 @@ export default function Detalles() {
                   <div className="mt-8 rounded-xl overflow-hidden border border-line h-48 w-full shadow-sm">
                     <iframe
                       title={t.detalles.lodgeMapTitle}
-                      src="https://www.google.com/maps?q=Pura%20Lodge%2C%20Callej%C3%B3n%20Lagunillas%205385%2C%20Laguna%20Grande%2C%20San%20Pedro%20de%20la%20Paz%2C%20Chile&output=embed"
+                      src="https://www.google.com/maps?q=Biopark%20Laguna%20Grande%20-%20Callej%C3%B3n%20Lagunillas%2C%20Camino%20a%20Coronel%205385%2C%20San%20Pedro%20de%20la%20Paz%2C%20B%C3%ADo%20B%C3%ADo&output=embed"
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
                       className="w-full h-full border-0"

@@ -52,6 +52,7 @@ type Dict = {
     copy: string;
     name: string;
     lastName: string;
+    countryCode: string;
     phone: string;
     email: string;
     attending: string;
@@ -64,6 +65,12 @@ type Dict = {
     success: string;
     missingEndpoint: string;
     missingFields: string;
+    requiredField: string;
+    invalidFields: string;
+    phoneFormat: string;
+    phoneLength: string;
+    digits: string;
+    emailFormat: string;
     sending: string;
     helpTitle: string;
     helpCopy: string;
@@ -144,6 +151,7 @@ export const translations: Record<Lang, Dict> = {
       copy: "Confírmanos tu asistencia para acompañarnos en este día tan especial.",
       name: "Nombre",
       lastName: "Apellido",
+      countryCode: "Codigo de pais",
       phone: "Teléfono",
       email: "Correo",
       attending: "¿Confirmas asistencia?",
@@ -156,6 +164,12 @@ export const translations: Record<Lang, Dict> = {
       success: "Gracias, tu confirmación fue enviada.",
       missingEndpoint: "Falta configurar el endpoint del formulario.",
       missingFields: "Completa los campos obligatorios antes de enviar.",
+      requiredField: "Completa este campo antes de enviar.",
+      invalidFields: "Revisa el formato del telefono o correo antes de enviar.",
+      phoneFormat: "Ingresa solo numeros, sin espacios ni simbolos.",
+      phoneLength: "Revisa el largo del numero para el codigo de pais seleccionado.",
+      digits: "digitos",
+      emailFormat: "Ingresa un correo valido, por ejemplo nombre@correo.com.",
       sending: "Enviando confirmación...",
       helpTitle: "Nos haría muy felices verte allá",
       helpCopy:
@@ -240,6 +254,7 @@ export const translations: Record<Lang, Dict> = {
       copy: "Confirm your attendance to celebrate this special day with us.",
       name: "First name",
       lastName: "Last name",
+      countryCode: "Country code",
       phone: "Phone",
       email: "Email",
       attending: "Will you attend?",
@@ -252,6 +267,12 @@ export const translations: Record<Lang, Dict> = {
       success: "Thank you, your RSVP has been sent.",
       missingEndpoint: "Form endpoint is not configured.",
       missingFields: "Please complete the required fields before sending.",
+      requiredField: "Complete this field before sending.",
+      invalidFields: "Please check the phone or email format before sending.",
+      phoneFormat: "Enter numbers only, without spaces or symbols.",
+      phoneLength: "Check the phone length for the selected country code.",
+      digits: "digits",
+      emailFormat: "Enter a valid email, for example name@email.com.",
       sending: "Sending RSVP...",
       helpTitle: "It would make us so happy to see you there",
       helpCopy:
