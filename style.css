@@ -517,9 +517,28 @@ main,
 
 .schedule-item {
     display: grid;
-    grid-template-columns: 0.9fr 1.1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        "left right"
+        "photo map";
     gap: 2.5rem;
     align-items: start;
+}
+
+.schedule-left-top {
+    grid-area: left;
+}
+
+.schedule-right-top {
+    grid-area: right;
+}
+
+.schedule-photo-left {
+    grid-area: photo;
+}
+
+.schedule-map-right {
+    grid-area: map;
 }
 
 .schedule-left,
@@ -601,16 +620,114 @@ main,
 }
 
 .schedule-map {
-    margin-top: 1.5rem;
     overflow: hidden;
     border: 1px solid var(--line);
     background: #f3efe9;
+    aspect-ratio: 5 / 4;
+    box-shadow: var(--shadow);
+}
+
+.schedule-map-right {
+    border-left: 1px solid #8a8178;
+    padding-left: 3rem;
 }
 
 .schedule-map iframe {
     width: 100%;
-    height: 240px;
+    height: 100%;
     border: 0;
+}
+
+.schedule-photo {
+    margin: 0;
+    overflow: hidden;
+    aspect-ratio: 5 / 4;
+}
+
+.schedule-photo-left {
+    margin-top: 0;
+}
+
+.schedule-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.schedule-carousel {
+    position: relative;
+}
+
+.schedule-carousel-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 420ms ease;
+}
+
+.schedule-carousel-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+}
+
+.schedule-carousel-slide img {
+    width: 100%;
+    height: 100%;
+}
+
+.schedule-carousel-button {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(78, 78, 78, 0.72);
+    color: #fff;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    transform: translateY(-50%);
+}
+
+.schedule-carousel-button:hover {
+    background: rgba(62, 62, 62, 0.9);
+}
+
+.schedule-carousel-button-prev {
+    left: 0.85rem;
+}
+
+.schedule-carousel-button-next {
+    right: 0.85rem;
+}
+
+.schedule-carousel-dots {
+    position: absolute;
+    left: 50%;
+    bottom: 0.9rem;
+    z-index: 2;
+    display: flex;
+    gap: 0.45rem;
+    transform: translateX(-50%);
+}
+
+.schedule-carousel-dot {
+    width: 0.7rem;
+    height: 0.7rem;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.55);
+    cursor: pointer;
+}
+
+.schedule-carousel-dot.is-active {
+    background: #fff;
 }
 
 /* ─── INTRO ─────────────────────────────────────────────────────── */
@@ -759,6 +876,11 @@ main,
 
     .schedule-item {
         grid-template-columns: 1fr;
+        grid-template-areas:
+            "left"
+            "right"
+            "photo"
+            "map";
         gap: 0;
     }
 
@@ -783,8 +905,28 @@ main,
         width: 100%;
     }
 
-    .schedule-map iframe {
-        height: 200px;
+    .schedule-map {
+        aspect-ratio: 5 / 4;
+    }
+
+    .schedule-map-right {
+        border-left: 0;
+        padding-left: 0;
+        margin-top: 1rem;
+    }
+
+    .schedule-photo {
+        aspect-ratio: 5 / 4;
+    }
+
+    .schedule-photo-left {
+        margin-top: 1rem;
+    }
+
+    .schedule-carousel-button {
+        width: 2.2rem;
+        height: 2.2rem;
+        font-size: 1.35rem;
     }
 
     /* Registry */
