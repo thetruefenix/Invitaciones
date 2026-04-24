@@ -1,6 +1,7 @@
 import Layout from "../components/Layout";
 import useCountdown from "../hooks/useCountdown";
 import useReveal from "../hooks/useReveal";
+import { useLang } from "../i18n/LanguageContext";
 import foto1 from "../assets/carrucel/foto-1.jpeg";
 import foto2 from "../assets/carrucel/foto-2.jpeg";
 import foto3 from "../assets/carrucel/foto-3.jpeg";
@@ -14,9 +15,10 @@ const ghostTiles = [foto1, foto2, foto3, foto4, foto1, foto2, foto3, foto4];
 export default function Home() {
   const { days, hours, minutes, seconds } = useCountdown(WEDDING_DATE);
   useReveal();
+  const { t } = useLang();
 
   return (
-    <Layout page="home" title="Home | Gabriela & Diego">
+    <Layout page="home" title={t.titles.home}>
       <section className="hero reveal" id="inicio">
         <div className="hero-marquee hero-reveal">
           <div className="marquee-track">
@@ -32,7 +34,7 @@ export default function Home() {
             ))}
           </div>
           <div className="hero-overlay">
-            <h1 className="hero-script">we're getting married!</h1>
+            <h1 className="hero-script">{t.home.heroScript}</h1>
           </div>
         </div>
 
@@ -44,28 +46,28 @@ export default function Home() {
           </div>
           <div className="date-location-row">
             <div className="date-location-card">
-              <h3>San Pedro de la Paz</h3>
+              <h3>{t.home.location}</h3>
             </div>
             <div className="date-location-card">
-              <h3>February 11, 2027</h3>
+              <h3>{t.home.date}</h3>
             </div>
           </div>
-          <div className="countdown-card" aria-label="Cuenta regresiva para la boda">
+          <div className="countdown-card" aria-label={t.home.countdownAria}>
             <div className="countdown-item">
               <strong>{days}</strong>
-              <span>days</span>
+              <span>{t.home.days}</span>
             </div>
             <div className="countdown-item">
               <strong>{hours}</strong>
-              <span>hours</span>
+              <span>{t.home.hours}</span>
             </div>
             <div className="countdown-item">
               <strong>{minutes}</strong>
-              <span>minutes</span>
+              <span>{t.home.minutes}</span>
             </div>
             <div className="countdown-item">
               <strong>{seconds}</strong>
-              <span>seconds</span>
+              <span>{t.home.seconds}</span>
             </div>
           </div>
         </div>

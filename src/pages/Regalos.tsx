@@ -1,22 +1,21 @@
 import Layout from "../components/Layout";
 import useReveal from "../hooks/useReveal";
+import { useLang } from "../i18n/LanguageContext";
 
 const REGISTRY_URL =
   "https://novios.falabella.com/info-evento/evento?codigoEvento=2104394";
 
 export default function Regalos() {
   useReveal();
+  const { t } = useLang();
 
   return (
-    <Layout page="regalos" title="Regalos | Gabriela & Diego">
+    <Layout page="regalos" title={t.titles.regalos}>
       <section className="registry-section reveal">
         <div className="section-heading">
-          <p className="section-kicker">Regalos</p>
-          <h2>Lista de novios</h2>
-          <p className="section-copy">
-            Si desean hacernos un regalo, aquí encontrarán nuestra lista en
-            Falabella. Haz clic para ver todos los productos.
-          </p>
+          <p className="section-kicker">{t.regalos.kicker}</p>
+          <h2>{t.regalos.title}</h2>
+          <p className="section-copy">{t.regalos.copy}</p>
         </div>
 
         <div className="registry-browser reveal">
@@ -32,7 +31,7 @@ export default function Regalos() {
             href={REGISTRY_URL}
             target="_blank"
             rel="noreferrer"
-            aria-label="Ver lista de novios en Falabella"
+            aria-label={t.regalos.ariaLabel}
           >
             <div className="preview-content">
               <svg
@@ -52,12 +51,12 @@ export default function Regalos() {
                 <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z" />
                 <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" />
               </svg>
-              <p className="preview-title">Lista de novios</p>
+              <p className="preview-title">{t.regalos.previewTitle}</p>
               <p className="preview-names">Gabriela &amp; Diego</p>
-              <span className="preview-cta">Ver regalos &rarr;</span>
+              <span className="preview-cta">{t.regalos.previewCta}</span>
             </div>
             <div className="preview-hover-overlay">
-              <span>Abrir en Falabella &rarr;</span>
+              <span>{t.regalos.previewHover}</span>
             </div>
           </a>
         </div>

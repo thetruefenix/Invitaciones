@@ -8,7 +8,6 @@ import Confirma from "./pages/Confirma";
 
 export default function App() {
   const location = useLocation();
-
   useEffect(() => {
     const frame = requestAnimationFrame(() => {
       document.body.classList.add("is-ready");

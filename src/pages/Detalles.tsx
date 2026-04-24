@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Layout from "../components/Layout";
 import useReveal from "../hooks/useReveal";
+import { useLang } from "../i18n/LanguageContext";
 import ceremoniaPhoto from "../ceremonia.jpg";
 import celebracionPhoto1 from "../celebracion.jpeg";
 import celebracionPhoto2 from "../celebracion2.jpeg";
@@ -16,6 +17,7 @@ const celebrationPhotos = [
 
 export default function Detalles() {
   useReveal();
+  const { t } = useLang();
   const [celebrationIndex, setCelebrationIndex] = useState(0);
 
   const previousCelebrationPhoto = () => {
@@ -31,24 +33,24 @@ export default function Detalles() {
   };
 
   return (
-    <Layout page="detalles" title="Detalles | Gabriela & Diego">
+    <Layout page="detalles" title={t.titles.detalles}>
       <section className="schedule-page reveal">
         <div className="schedule-heading">
-          <h1>Jueves, 11 de Febrero, 2027</h1>
+          <h1>{t.detalles.titleDate}</h1>
         </div>
 
         <div className="schedule-list">
           <article className="schedule-item reveal">
             <div className="schedule-left schedule-left-top">
               <div className="schedule-icon">♡♡</div>
-              <h2>Ceremonia</h2>
-              <p>4:30 pm - 6:00 pm</p>
+              <h2>{t.detalles.ceremony}</h2>
+              <p>{t.detalles.ceremonyTime}</p>
             </div>
 
             <div className="schedule-right schedule-right-top">
-              <h3>Iglesia Evangélica Bautista de San Pedro</h3>
-              <p className="schedule-address">San Pedro de la Paz, Bío Bío, Chile</p>
-              <p>Código de vestimenta Formal/Etiqueta opcional</p>
+              <h3>{t.detalles.ceremonyPlace}</h3>
+              <p className="schedule-address">{t.detalles.ceremonyAddress}</p>
+              <p>{t.detalles.dressCodeFormal}</p>
 
               <div className="schedule-actions">
                 <a
@@ -57,7 +59,7 @@ export default function Detalles() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Map
+                  {t.detalles.map}
                 </a>
                 <a
                   className="schedule-button schedule-button-secondary"
@@ -65,18 +67,18 @@ export default function Detalles() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Add to calendar
+                  {t.detalles.addToCalendar}
                 </a>
               </div>
             </div>
 
             <figure className="schedule-photo schedule-photo-left">
-              <img src={ceremoniaPhoto} alt="Ceremonia" />
+              <img src={ceremoniaPhoto} alt={t.detalles.ceremonyPhotoAlt} />
             </figure>
 
             <div className="schedule-map schedule-map-right">
               <iframe
-                title="Mapa de la iglesia"
+                title={t.detalles.churchMapTitle}
                 src="https://www.google.com/maps?q=Primera%20Iglesia%20Bautista%20San%20Pedro%20de%20la%20Paz%2C%20Calle%20Nueva%201970%2C%20San%20Pedro%20de%20la%20Paz%2C%20Biob%C3%ADo&output=embed"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
@@ -87,20 +89,17 @@ export default function Detalles() {
           <article className="schedule-item reveal">
             <div className="schedule-left schedule-left-top">
               <div className="schedule-icon">♡♡</div>
-              <h2>Celebración</h2>
-              <p>Thu, Feb 11, 2027, 6:00 pm - Fri, Feb 12, 2027, 4:00 am</p>
+              <h2>{t.detalles.celebration}</h2>
+              <p>{t.detalles.celebrationTime}</p>
             </div>
 
             <div className="schedule-right schedule-right-top">
-              <h3>Centro de eventos PuraLodge</h3>
+              <h3>{t.detalles.celebrationPlace}</h3>
               <p className="schedule-address">
-                Lagunillas Callejón, 5385, Biobío, Bío Bío, Chile
+                {t.detalles.celebrationAddress}
               </p>
-              <p>Código de Vestimenta Formal/etiqueta opcional</p>
-              <p>
-                Nuestra celebración contará con un cóctel extendido, seguido de una fiesta
-                inolvidable
-              </p>
+              <p>{t.detalles.celebrationDressCode}</p>
+              <p>{t.detalles.celebrationDesc}</p>
 
               <div className="schedule-actions">
                 <a
@@ -109,7 +108,7 @@ export default function Detalles() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Map
+                  {t.detalles.map}
                 </a>
                 <a
                   className="schedule-button schedule-button-secondary"
@@ -117,19 +116,25 @@ export default function Detalles() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Add to calendar
+                  {t.detalles.addToCalendar}
                 </a>
               </div>
             </div>
 
-            <div className="schedule-photo schedule-photo-left schedule-carousel" aria-label="Fotos de celebración">
+            <div
+              className="schedule-photo schedule-photo-left schedule-carousel"
+              aria-label={t.detalles.celebrationCarouselAria}
+            >
               <div
                 className="schedule-carousel-track"
                 style={{ transform: `translateX(-${celebrationIndex * 100}%)` }}
               >
                 {celebrationPhotos.map((photo, index) => (
                   <div className="schedule-carousel-slide" key={photo}>
-                    <img src={photo} alt={`Celebración ${index + 1}`} />
+                    <img
+                      src={photo}
+                      alt={`${t.detalles.celebrationPhotoAlt} ${index + 1}`}
+                    />
                   </div>
                 ))}
               </div>
@@ -137,7 +142,7 @@ export default function Detalles() {
               <button
                 className="schedule-carousel-button schedule-carousel-button-prev"
                 type="button"
-                aria-label="Foto anterior"
+                aria-label={t.detalles.prevPhoto}
                 onClick={previousCelebrationPhoto}
               >
                 ‹
@@ -145,13 +150,16 @@ export default function Detalles() {
               <button
                 className="schedule-carousel-button schedule-carousel-button-next"
                 type="button"
-                aria-label="Foto siguiente"
+                aria-label={t.detalles.nextPhoto}
                 onClick={nextCelebrationPhoto}
               >
                 ›
               </button>
 
-              <div className="schedule-carousel-dots" aria-label="Indicadores de foto">
+              <div
+                className="schedule-carousel-dots"
+                aria-label={t.detalles.dotsAria}
+              >
                 {celebrationPhotos.map((_, index) => (
                   <button
                     key={`dot-${index}`}
@@ -159,7 +167,7 @@ export default function Detalles() {
                     className={`schedule-carousel-dot${
                       index === celebrationIndex ? " is-active" : ""
                     }`}
-                    aria-label={`Ir a foto ${index + 1}`}
+                    aria-label={`${t.detalles.goToPhoto} ${index + 1}`}
                     onClick={() => setCelebrationIndex(index)}
                   />
                 ))}
@@ -168,7 +176,7 @@ export default function Detalles() {
 
             <div className="schedule-map schedule-map-right">
               <iframe
-                title="Mapa de Pura Lodge"
+                title={t.detalles.lodgeMapTitle}
                 src="https://www.google.com/maps?q=Pura%20Lodge%2C%20Callej%C3%B3n%20Lagunillas%205385%2C%20Laguna%20Grande%2C%20San%20Pedro%20de%20la%20Paz%2C%20Chile&output=embed"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

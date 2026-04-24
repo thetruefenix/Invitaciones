@@ -1,12 +1,14 @@
 import { useRef, useState, type FormEvent } from "react";
 import Layout from "../components/Layout";
 import useReveal from "../hooks/useReveal";
+import { useLang } from "../i18n/LanguageContext";
 import { RSVP_ENDPOINT } from "../config/rsvp";
 
 type Status = { message: string; state: "" | "success" | "error" };
 
 export default function Confirma() {
   useReveal();
+  const { t } = useLang();
 
   const formRef = useRef<HTMLFormElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -24,7 +26,7 @@ export default function Confirma() {
     }
     setSubmitting(false);
     formRef.current?.reset();
-    setStatus({ message: "Gracias, tu confirmacion fue enviada.", state: "success" });
+    setStatus({ message: t.confirma.success, state: "success" });
   };
 
   const onIframeLoad = () => {
@@ -36,15 +38,17 @@ export default function Confirma() {
     const form = event.currentTarget;
     if (!RSVP_ENDPOINT) {
       event.preventDefault();
-      setStatus({ message: "Falta configurar el endpoint del formulario.", state: "error" });
+      setStatus({ message: t.confirma.missingEndpoint, state: "error" });
       return;
     }
 
-    const required = Array.from(form.querySelectorAll<HTMLInputElement | HTMLSelectElement>("[required]"));
+    const required = Array.from(
+      form.querySelectorAll<HTMLInputElement | HTMLSelectElement>("[required]")
+    );
     const empty = required.some((f) => !String(f.value || "").trim());
     if (empty) {
       event.preventDefault();
-      setStatus({ message: "Completa los campos obligatorios antes de enviar.", state: "error" });
+      setStatus({ message: t.confirma.missingFields, state: "error" });
       return;
     }
 
@@ -52,7 +56,7 @@ export default function Confirma() {
     pendingRef.current = true;
     if (fallbackRef.current) window.clearTimeout(fallbackRef.current);
     setSubmitting(true);
-    setStatus({ message: "Enviando confirmacion...", state: "" });
+    setStatus({ message: t.confirma.sending, state: "" });
 
     fallbackRef.current = window.setTimeout(() => {
       if (!pendingRef.current) return;
@@ -61,13 +65,11 @@ export default function Confirma() {
   };
 
   return (
-    <Layout page="confirma" title="Confirma aca | Gabriela & Diego">
+    <Layout page="confirma" title={t.titles.confirma}>
       <section className="confirm-section reveal">
         <div className="section-heading">
-          <h2>Confirma acá</h2>
-          <p className="section-copy">
-            Confírmanos tu asistencia para acompañarnos en este día tan especial.
-          </p>
+          <h2>{t.confirma.title}</h2>
+          <p className="section-copy">{t.confirma.copy}</p>
         </div>
 
         <div className="rsvp-shell reveal">
@@ -83,41 +85,41 @@ export default function Confirma() {
             <input type="hidden" name="source" value="website" />
 
             <label>
-              Nombre
+              {t.confirma.name}
               <input type="text" name="nombre" autoComplete="given-name" required />
             </label>
 
             <label>
-              Apellido
+              {t.confirma.lastName}
               <input type="text" name="apellido" autoComplete="family-name" required />
             </label>
 
             <label>
-              Teléfono
+              {t.confirma.phone}
               <input type="tel" name="telefono" autoComplete="tel" required />
             </label>
 
             <label>
-              Correo
+              {t.confirma.email}
               <input type="email" name="correo" autoComplete="email" required />
             </label>
 
             <label>
-              ¿Confirmas asistencia?
+              {t.confirma.attending}
               <select name="confirmación" required defaultValue="">
-                <option value="">Selecciona una opción</option>
-                <option value="Si, asistire">Sí, asistiré</option>
-                <option value="No podre asistir">No podré asistir</option>
+                <option value="">{t.confirma.selectOption}</option>
+                <option value="Si, asistire">{t.confirma.yes}</option>
+                <option value="No podre asistir">{t.confirma.no}</option>
               </select>
             </label>
 
             <label>
-              Mensaje adicional
-              <textarea name="mensaje" rows={4} placeholder="Opcional" />
+              {t.confirma.message}
+              <textarea name="mensaje" rows={4} placeholder={t.confirma.optional} />
             </label>
 
             <button className="button-link" type="submit" disabled={submitting}>
-              Enviar confirmación
+              {t.confirma.submit}
             </button>
             <p
               className="form-status"
@@ -129,11 +131,8 @@ export default function Confirma() {
           </form>
 
           <div className="rsvp-help">
-            <h3>Nos haría muy felices verte allá</h3>
-            <p>
-              Cada persona que nos acompaña forma parte de esta historia, y tu presencia haría este
-              día todavía más especial para nosotros.
-            </p>
+            <h3>{t.confirma.helpTitle}</h3>
+            <p>{t.confirma.helpCopy}</p>
           </div>
         </div>
 
@@ -141,7 +140,7 @@ export default function Confirma() {
           ref={iframeRef}
           name="rsvp-submit-frame"
           hidden
-          title="Envio RSVP"
+          title={t.confirma.iframeTitle}
           onLoad={onIframeLoad}
         />
       </section>

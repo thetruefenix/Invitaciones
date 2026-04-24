@@ -1,15 +1,18 @@
 import { NavLink, Link } from "react-router-dom";
 import useScrolled from "../hooks/useScrolled";
-
-const links: { to: string; label: string }[] = [
-  { to: "/home", label: "Home" },
-  { to: "/detalles", label: "Detalles" },
-  { to: "/regalos", label: "Regalos" },
-  { to: "/confirma", label: "Confirmación" },
-];
+import { useLang } from "../i18n/LanguageContext";
+import LanguageToggle from "./LanguageToggle";
 
 export default function Header() {
   const scrolled = useScrolled(10);
+  const { t } = useLang();
+
+  const links = [
+    { to: "/home", label: t.nav.home },
+    { to: "/detalles", label: t.nav.detalles },
+    { to: "/regalos", label: t.nav.regalos },
+    { to: "/confirma", label: t.nav.confirma },
+  ];
 
   return (
     <header className={`topbar${scrolled ? " scrolled" : ""}`}>
@@ -28,6 +31,7 @@ export default function Header() {
             </NavLink>
           ))}
         </nav>
+        <LanguageToggle />
       </div>
     </header>
   );
