@@ -11,6 +11,8 @@ const WEDDING_DATE = new Date("2027-02-11T16:30:00-03:00");
 
 const tiles = [foto1, foto2, foto3, foto4, foto1, foto2, foto3, foto4];
 const ghostTiles = [foto1, foto2, foto3, foto4, foto1, foto2, foto3, foto4];
+const infoLineClass =
+  "m-0 max-w-full font-serif text-[clamp(0.78rem,1.35vw,0.98rem)] font-bold tracking-[0.06em] normal-case leading-[1.3] text-text whitespace-nowrap tablet:text-[clamp(0.82rem,3.4vw,1.18rem)] mobile:text-[clamp(0.62rem,2.75vw,0.78rem)]";
 
 export default function Home() {
   const { days, hours, minutes, seconds } = useCountdown(WEDDING_DATE);
@@ -73,16 +75,12 @@ export default function Home() {
               Diego Alvarado Zárate
             </h2>
           </div>
-          <div className="flex justify-center items-center gap-10 mt-10 tablet:flex-col tablet:gap-[0.35rem] tablet:mt-6">
+          <div className="flex justify-center items-center gap-10 mt-10 tablet:flex-col tablet:gap-[0.35rem] tablet:mt-6 mobile:!flex-row mobile:gap-3">
             <div>
-              <h3 className="m-0 font-serif text-[clamp(0.78rem,1.6vw,1.05rem)] font-bold tracking-[0.12em] uppercase leading-[1.5] text-text">
-                {t.home.location}
-              </h3>
+              <h3 className={infoLineClass}>{t.home.location}</h3>
             </div>
             <div>
-              <h3 className="m-0 font-serif text-[clamp(0.78rem,1.6vw,1.05rem)] font-bold tracking-[0.12em] uppercase leading-[1.5] text-text">
-                {t.home.date}
-              </h3>
+              <h3 className={infoLineClass}>{t.home.date}</h3>
             </div>
           </div>
           <div

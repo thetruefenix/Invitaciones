@@ -139,7 +139,7 @@ export default function Confirma() {
 
             <label className={labelClass}>
               {t.confirma.attending}
-              <select className={field} name="confirmación" required defaultValue="">
+              <select className={field} name="confirmacion" required defaultValue="">
                 <option value="">{t.confirma.selectOption}</option>
                 <option value="Si, asistire">{t.confirma.yes}</option>
                 <option value="No podre asistir">{t.confirma.no}</option>
