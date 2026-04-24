@@ -46,10 +46,9 @@ export default function Home() {
             <div className="date-location-card">
               <h3>San Pedro de la Paz</h3>
             </div>
-          </div>
-          <div className="date-location-card">
-            <h3>February 11</h3>
-            <h3>2027</h3>
+            <div className="date-location-card">
+              <h3>February 11, 2027</h3>
+            </div>
           </div>
           <div className="countdown-card" aria-label="Cuenta regresiva para la boda">
             <div className="countdown-item">
