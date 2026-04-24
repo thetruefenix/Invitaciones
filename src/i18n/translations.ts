@@ -93,7 +93,7 @@ export const translations: Record<Lang, Dict> = {
       warning: "Esta invitación es personal",
     },
     home: {
-      heroScript: "¡nos casamos!",
+      heroScript: "we're getting married!",
       location: "San Pedro de la Paz",
       date: "11 de Febrero de 2027",
       countdownAria: "Cuenta regresiva para la boda",
@@ -163,7 +163,7 @@ export const translations: Record<Lang, Dict> = {
       iframeTitle: "Envío RSVP",
     },
     footer: {
-      line1: "Por todos los días del camino",
+      line1: "For all the days along the way",
       line2: "Gabriela & Diego",
     },
     titles: {
@@ -202,7 +202,7 @@ export const translations: Record<Lang, Dict> = {
       titleDate: "Thursday, February 11, 2027",
       ceremony: "Ceremony",
       ceremonyTime: "4:30 pm - 6:00 pm",
-      ceremonyPlace: "San Pedro Evangelical Baptist Church",
+      ceremonyPlace: "Iglesia Evangélica Bautista de San Pedro",
       ceremonyAddress: "San Pedro de la Paz, Bío Bío, Chile",
       dressCodeFormal: "Dress code: Formal / Black tie optional",
       celebration: "Celebration",
