@@ -20,7 +20,7 @@ export default function Layout({ page, title, children }: LayoutProps) {
   return (
     <>
       <Header />
-      <main>{children}</main>
+      <main className="container-narrow">{children}</main>
       <Footer />
     </>
   );

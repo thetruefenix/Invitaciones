@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply bg-bg text-text font-serif;
+    overflow-x: hidden;
+  }
+
+  img,
+  iframe {
+    display: block;
+    max-width: 100%;
+  }
+
+  img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-bg;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-line-strong;
+    border-radius: 0;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-text;
+  }
+  ::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+    background: transparent;
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #d9cdc2 #f7f5f2;
+  }
+}
+
+@layer components {
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 700ms ease, transform 700ms ease;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  body.is-ready .hero-reveal {
+    @apply animate-heroEntrance;
+  }
+
+  .container-narrow {
+    width: min(1180px, calc(100% - 2rem));
+    @apply mx-auto;
+  }
+}

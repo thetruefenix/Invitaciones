@@ -2,7 +2,9 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { preloadAudio, startAudio } from "../hooks/useAudio";
 import { useLang } from "../i18n/LanguageContext";
-import LanguageToggle from "../components/LanguageToggle";
+
+const INTRO_BG =
+  "radial-gradient(circle at top, rgba(255,255,255,0.92), rgba(247,245,242,0.98) 42%, rgba(236,228,219,0.9) 100%), #f7f5f2";
 
 export default function Intro() {
   const navigate = useNavigate();
@@ -10,14 +12,12 @@ export default function Intro() {
 
   useEffect(() => {
     document.title = t.titles.intro;
-    const body = document.body;
-    body.classList.add("intro-page", "intro-message-page");
-    body.dataset.page = "intro";
+    document.body.dataset.page = "intro";
     preloadAudio("/sound.mp3", 0.05, true);
 
     const open = () => {
-      if (body.classList.contains("intro-opened")) return;
-      body.classList.add("intro-opened");
+      if (document.body.dataset.introOpened === "true") return;
+      document.body.dataset.introOpened = "true";
       startAudio("/sound.mp3", 0.05, true);
       navigate("/home");
     };
@@ -32,32 +32,33 @@ export default function Intro() {
     window.addEventListener("keydown", onKey);
     return () => {
       window.removeEventListener("keydown", onKey);
-      body.classList.remove("intro-page", "intro-message-page", "intro-opened");
-      delete body.dataset.page;
+      delete document.body.dataset.page;
+      delete document.body.dataset.introOpened;
     };
   }, [navigate, t.titles.intro]);
 
   const openIntro = () => {
-    if (document.body.classList.contains("intro-opened")) return;
-    document.body.classList.add("intro-opened");
+    if (document.body.dataset.introOpened === "true") return;
+    document.body.dataset.introOpened = "true";
     startAudio("/sound.mp3", 0.05, true);
     navigate("/home");
   };
 
   return (
-    <>
-      <div
-        className="intro-lang-toggle"
-        onClick={(e) => e.stopPropagation()}
+    <div className="min-h-screen cursor-pointer grid place-items-center" style={{ background: INTRO_BG }}>
+      <main
+        className="min-h-screen w-[min(980px,calc(100%-2rem))] mx-auto grid place-items-center py-12 text-center cursor-inherit tablet:w-[min(100%-1.5rem,980px)]"
+        onClick={openIntro}
       >
-        <LanguageToggle />
-      </div>
-      <main className="intro-message-shell" onClick={openIntro}>
-        <div className="intro-message-block hero-reveal">
-          <h1>{t.intro.title}</h1>
-          <p className="intro-warning">{t.intro.warning}</p>
+        <div className="max-w-[56rem] hero-reveal">
+          <h1 className="m-0 text-text font-script font-normal text-[clamp(3.4rem,9vw,8.2rem)] leading-[1.04]">
+            {t.intro.title}
+          </h1>
+          <p className="mt-[1.2rem] mb-0 font-display font-normal text-[clamp(0.95rem,1.8vw,1.12rem)] leading-[1.8]">
+            {t.intro.warning}
+          </p>
         </div>
       </main>
-    </>
+    </div>
   );
 }

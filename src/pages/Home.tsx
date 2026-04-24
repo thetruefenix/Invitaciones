@@ -19,56 +19,94 @@ export default function Home() {
 
   return (
     <Layout page="home" title={t.titles.home}>
-      <section className="hero reveal" id="inicio">
-        <div className="hero-marquee hero-reveal">
-          <div className="marquee-track">
+      <section
+        className="reveal w-screen ml-[calc(50%-50vw)] mr-[calc(50%-50vw)] pb-[4.5rem] tablet:pb-12"
+        id="inicio"
+      >
+        <div className="hero-reveal relative overflow-hidden h-[min(90vh,980px)] bg-[#f9f9f9] tablet:h-[min(55vh,420px)] mobile:h-[min(48vh,320px)]">
+          <div className="flex h-full w-max will-change-transform animate-marquee">
             {tiles.map((src, i) => (
-              <figure className="hero-tile" key={`t-${i}`}>
-                <img src={src} alt={`Gabriela y Diego ${(i % 4) + 1}`} />
+              <figure
+                className="flex-[0_0_auto] h-full m-0 overflow-hidden flex items-center justify-center bg-[#f3efe9] tablet:flex-[0_0_78vw] tablet:w-[78vw] mobile:flex-[0_0_88vw] mobile:w-[88vw]"
+                key={`t-${i}`}
+              >
+                <img
+                  src={src}
+                  alt={`Gabriela y Diego ${(i % 4) + 1}`}
+                  className="h-full w-auto max-w-none object-contain object-center tablet:w-full tablet:h-full tablet:max-w-full tablet:object-cover"
+                />
               </figure>
             ))}
             {ghostTiles.map((src, i) => (
-              <figure className="hero-tile" key={`g-${i}`} aria-hidden="true">
-                <img src={src} alt="" />
+              <figure
+                className="flex-[0_0_auto] h-full m-0 overflow-hidden flex items-center justify-center bg-[#f3efe9] tablet:flex-[0_0_78vw] tablet:w-[78vw] mobile:flex-[0_0_88vw] mobile:w-[88vw]"
+                key={`g-${i}`}
+                aria-hidden="true"
+              >
+                <img
+                  src={src}
+                  alt=""
+                  className="h-full w-auto max-w-none object-contain object-center tablet:w-full tablet:h-full tablet:max-w-full tablet:object-cover"
+                />
               </figure>
             ))}
           </div>
-          <div className="hero-overlay">
-            <h1 className="hero-script">{t.home.heroScript}</h1>
+          <div className="absolute inset-0 z-[3] flex items-center justify-center px-[clamp(1rem,6vw,5rem)] py-[clamp(1.5rem,5vw,3rem)]">
+            <h1
+              className="w-full m-0 text-white text-center font-script font-normal text-[clamp(2.8rem,6vw,6rem)] leading-[1.3]"
+              style={{ textShadow: "rgba(0,0,0,0.4) 0 0 31px" }}
+            >
+              {t.home.heroScript}
+            </h1>
           </div>
         </div>
 
-        <div className="hero-copy reveal">
-          <div className="names-block">
-            <h2>Gabriela Herrera Candia</h2>
-            <p className="ampersand">&</p>
-            <h2>Diego Alvarado Zárate</h2>
+        <div className="reveal relative w-[min(1180px,calc(100%-2rem))] max-w-[760px] mx-auto text-center pt-[65px] tablet:w-[min(100%-1.25rem,680px)] tablet:pt-6">
+          <div className="max-w-full mx-auto">
+            <h2 className="m-0 font-script font-normal text-[clamp(2.2rem,4.2vw,3.8rem)] leading-[1.05] text-text whitespace-nowrap tablet:text-[clamp(1.6rem,6vw,2.8rem)] tablet:leading-[1.1] mobile:text-[clamp(1.2rem,7vw,2rem)]">
+              Gabriela Herrera Candia
+            </h2>
+            <p className="my-[0.2rem] font-script text-[clamp(2.2rem,3.8vw,3.2rem)] leading-[1.6] font-normal overflow-visible tablet:my-[0.15rem] tablet:text-[clamp(1.7rem,5.5vw,2.6rem)]">
+              &
+            </p>
+            <h2 className="m-0 font-script font-normal text-[clamp(2.2rem,4.2vw,3.8rem)] leading-[1.05] text-text whitespace-nowrap tablet:text-[clamp(1.6rem,6vw,2.8rem)] tablet:leading-[1.1] mobile:text-[clamp(1.2rem,7vw,2rem)]">
+              Diego Alvarado Zárate
+            </h2>
           </div>
-          <div className="date-location-row">
-            <div className="date-location-card">
-              <h3>{t.home.location}</h3>
+          <div className="flex justify-center items-center gap-10 mt-10 tablet:flex-col tablet:gap-[0.35rem] tablet:mt-6">
+            <div>
+              <h3 className="m-0 font-serif text-[clamp(0.78rem,1.6vw,1.05rem)] font-bold tracking-[0.12em] uppercase leading-[1.5] text-text">
+                {t.home.location}
+              </h3>
             </div>
-            <div className="date-location-card">
-              <h3>{t.home.date}</h3>
+            <div>
+              <h3 className="m-0 font-serif text-[clamp(0.78rem,1.6vw,1.05rem)] font-bold tracking-[0.12em] uppercase leading-[1.5] text-text">
+                {t.home.date}
+              </h3>
             </div>
           </div>
-          <div className="countdown-card" aria-label={t.home.countdownAria}>
-            <div className="countdown-item">
-              <strong>{days}</strong>
-              <span>{t.home.days}</span>
-            </div>
-            <div className="countdown-item">
-              <strong>{hours}</strong>
-              <span>{t.home.hours}</span>
-            </div>
-            <div className="countdown-item">
-              <strong>{minutes}</strong>
-              <span>{t.home.minutes}</span>
-            </div>
-            <div className="countdown-item">
-              <strong>{seconds}</strong>
-              <span>{t.home.seconds}</span>
-            </div>
+          <div
+            className="grid grid-cols-4 gap-3 max-w-[560px] mx-auto mt-8 tablet:grid-cols-2 tablet:max-w-full tablet:gap-[0.4rem_0.6rem] tablet:mt-[1.2rem] mobile:grid-cols-4 mobile:gap-1"
+            aria-label={t.home.countdownAria}
+          >
+            {[
+              { value: days, label: t.home.days },
+              { value: hours, label: t.home.hours },
+              { value: minutes, label: t.home.minutes },
+              { value: seconds, label: t.home.seconds },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="px-2 py-[0.95rem] bg-transparent tablet:px-[0.3rem] tablet:py-[0.65rem]"
+              >
+                <strong className="block font-serif text-[clamp(1rem,2vw,1.3rem)] font-normal mobile:text-[0.95rem]">
+                  {item.value}
+                </strong>
+                <span className="block mt-[0.2rem] text-[0.82rem] font-serif mobile:text-[0.68rem]">
+                  {item.label}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
