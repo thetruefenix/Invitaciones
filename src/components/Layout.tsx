@@ -1,4 +1,4 @@
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -12,15 +12,7 @@ type LayoutProps = {
 
 export default function Layout({ page, title, children }: LayoutProps) {
   const { t } = useLang();
-
-  useEffect(() => {
-    document.title = title;
-    document.body.dataset.page = page;
-    return () => {
-      delete document.body.dataset.page;
-    };
-  }, [page, title]);
-
+  const [showGuideButton, setShowGuideButton] = useState(true);
   const nextStep =
     page === "home"
       ? { to: "/detalles", label: t.guide.home }
@@ -30,12 +22,42 @@ export default function Layout({ page, title, children }: LayoutProps) {
           ? { to: "/confirma", label: t.guide.regalos }
           : null;
 
+  useEffect(() => {
+    document.title = title;
+    document.body.dataset.page = page;
+    return () => {
+      delete document.body.dataset.page;
+    };
+  }, [page, title]);
+
+  useEffect(() => {
+    if (!nextStep) {
+      setShowGuideButton(false);
+      return;
+    }
+
+    const updateGuideButton = () => {
+      const remaining =
+        document.documentElement.scrollHeight - window.innerHeight - window.scrollY;
+      setShowGuideButton(remaining > 140);
+    };
+
+    updateGuideButton();
+    window.addEventListener("scroll", updateGuideButton, { passive: true });
+    window.addEventListener("resize", updateGuideButton);
+
+    return () => {
+      window.removeEventListener("scroll", updateGuideButton);
+      window.removeEventListener("resize", updateGuideButton);
+    };
+  }, [nextStep]);
+
   return (
     <>
       <Header />
       <main className="container-narrow">{children}</main>
       <Footer />
-      {nextStep ? (
+      {nextStep && showGuideButton ? (
         <Link
           className="hidden tablet:inline-flex fixed left-1/2 bottom-[calc(0.85rem+env(safe-area-inset-bottom))] z-40 -translate-x-1/2 items-center justify-center min-h-[42px] min-w-[min(260px,calc(100vw-3rem))] px-5 rounded-full bg-text text-bg font-serif text-[0.92rem] no-underline shadow-soft border border-text/10 transition-transform duration-200 active:scale-[0.98]"
           to={nextStep.to}

@@ -20,6 +20,9 @@ export default function Regalos() {
             {t.regalos.title}
           </h2>
           <p className="m-0 font-serif font-normal">{t.regalos.copy}</p>
+          <p className="m-0 mt-4 font-serif italic text-[1.02rem] leading-[1.7] text-text/75">
+            {t.regalos.gentleNote}
+          </p>
         </div>
 
         <div className="reveal max-w-[560px] mx-auto rounded-[10px] overflow-hidden shadow-[0_30px_70px_rgba(78,78,78,0.08),0_0_0_1px_#e8e0d8]">
@@ -63,7 +66,7 @@ export default function Regalos() {
               <p className="m-0 font-serif text-[1.45rem] font-normal italic text-text tablet:text-[1.2rem]">
                 Gabriela &amp; Diego
               </p>
-              <span className="inline-block mt-2 px-[1.4rem] py-[0.6rem] border border-text font-serif text-[0.88rem] tracking-[0.04em] transition-colors duration-200">
+              <span className="inline-block mt-2 px-[1.4rem] py-[0.6rem] rounded-full border border-text font-serif text-[0.88rem] tracking-[0.04em] transition-colors duration-200">
                 {t.regalos.previewCta}
               </span>
             </div>

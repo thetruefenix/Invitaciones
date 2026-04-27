@@ -8,6 +8,17 @@ type Dict = {
     location: string;
     date: string;
     countdownAria: string;
+    summaryCeremonyLabel: string;
+    summaryCeremonyValue: string;
+    summaryCelebrationLabel: string;
+    summaryCelebrationValue: string;
+    summaryDressLabel: string;
+    summaryDressValue: string;
+    scriptureTitle: string;
+    scriptureOne: string;
+    scriptureOneRef: string;
+    scriptureTwo: string;
+    scriptureTwoRef: string;
     days: string;
     hours: string;
     minutes: string;
@@ -37,11 +48,15 @@ type Dict = {
     nextPhoto: string;
     dotsAria: string;
     goToPhoto: string;
+    transitionLine: string;
+    showDetail: string;
+    hideDetail: string;
   };
   regalos: {
     kicker: string;
     title: string;
     copy: string;
+    gentleNote: string;
     previewTitle: string;
     previewCta: string;
     previewHover: string;
@@ -72,6 +87,7 @@ type Dict = {
     digits: string;
     emailFormat: string;
     sending: string;
+    deliveryPending: string;
     helpTitle: string;
     helpCopy: string;
     iframeTitle: string;
@@ -105,6 +121,17 @@ export const translations: Record<Lang, Dict> = {
       location: "San Pedro de la Paz",
       date: "11 de Febrero de 2027",
       countdownAria: "Cuenta regresiva para la boda",
+      summaryCeremonyLabel: "Ceremonia",
+      summaryCeremonyValue: "4:30 pm en la iglesia",
+      summaryCelebrationLabel: "Celebracion",
+      summaryCelebrationValue: "Desde las 6:00 pm en PuraLodge",
+      summaryDressLabel: "Dress code",
+      summaryDressValue: "Formal / Etiqueta opcional",
+      scriptureTitle: "Versiculos para este dia",
+      scriptureOne: "Y sobre todas estas cosas vestios de amor, que es el vinculo perfecto.",
+      scriptureOneRef: "Colosenses 3:14",
+      scriptureTwo: "Mejores son dos que uno; porque tienen mejor paga de su trabajo.",
+      scriptureTwoRef: "Eclesiastes 4:9",
       days: "días",
       hours: "horas",
       minutes: "minutos",
@@ -137,11 +164,16 @@ export const translations: Record<Lang, Dict> = {
       nextPhoto: "Foto siguiente",
       dotsAria: "Indicadores de foto",
       goToPhoto: "Ir a foto",
+      transitionLine: "Despues del si, los esperamos para celebrar juntos.",
+      showDetail: "Ver detalle",
+      hideDetail: "Ocultar detalle",
     },
     regalos: {
       kicker: "Regalos",
       title: "Lista de novios",
       copy: "Si desean hacernos un regalo, aquí encontrarán nuestra lista en Falabella. Haz clic para ver todos los productos.",
+      gentleNote:
+        "Su presencia es nuestro mejor regalo, y si quieren ademas tener un detalle con nosotros, aqui encontraran nuestra lista.",
       previewTitle: "Lista de novios",
       previewCta: "Ver regalos →",
       previewHover: "Abrir en Falabella →",
@@ -172,6 +204,8 @@ export const translations: Record<Lang, Dict> = {
       digits: "digitos",
       emailFormat: "Ingresa un correo valido, por ejemplo nombre@correo.com.",
       sending: "Enviando confirmación...",
+      deliveryPending:
+        "No pudimos verificar visualmente el envio. Si no ves el correo de confirmacion, intenta nuevamente.",
       helpTitle: "Nos haría muy felices verte allá",
       helpCopy:
         "Cada persona que nos acompaña forma parte de esta historia, y tu presencia haría este día todavía más especial para nosotros.",
@@ -213,6 +247,17 @@ export const translations: Record<Lang, Dict> = {
       location: "San Pedro de la Paz",
       date: "February 11, 2027",
       countdownAria: "Countdown to the wedding",
+      summaryCeremonyLabel: "Ceremony",
+      summaryCeremonyValue: "4:30 pm at the church",
+      summaryCelebrationLabel: "Celebration",
+      summaryCelebrationValue: "From 6:00 pm at PuraLodge",
+      summaryDressLabel: "Dress code",
+      summaryDressValue: "Formal / Black tie optional",
+      scriptureTitle: "Verses for this day",
+      scriptureOne: "And over all these virtues put on love, which binds them all together.",
+      scriptureOneRef: "Colossians 3:14",
+      scriptureTwo: "Two are better than one, because they have a good return for their labor.",
+      scriptureTwoRef: "Ecclesiastes 4:9",
       days: "days",
       hours: "hours",
       minutes: "minutes",
@@ -245,11 +290,16 @@ export const translations: Record<Lang, Dict> = {
       nextPhoto: "Next photo",
       dotsAria: "Photo indicators",
       goToPhoto: "Go to photo",
+      transitionLine: "After the yes, we would love to celebrate together with you.",
+      showDetail: "View details",
+      hideDetail: "Hide details",
     },
     regalos: {
       kicker: "Gifts",
       title: "Wedding registry",
       copy: "If you'd like to give us a gift, you'll find our Falabella registry here. Click to browse all items.",
+      gentleNote:
+        "Your presence is our favorite gift, and if you would also like to treat us to something special, you can find our registry here.",
       previewTitle: "Wedding registry",
       previewCta: "View gifts →",
       previewHover: "Open on Falabella →",
@@ -280,6 +330,8 @@ export const translations: Record<Lang, Dict> = {
       digits: "digits",
       emailFormat: "Enter a valid email, for example name@email.com.",
       sending: "Sending RSVP...",
+      deliveryPending:
+        "We could not visually verify the submission. If you do not receive the confirmation email, please try again.",
       helpTitle: "It would make us so happy to see you there",
       helpCopy:
         "Every person who joins us is part of this story, and your presence would make this day even more special for us.",

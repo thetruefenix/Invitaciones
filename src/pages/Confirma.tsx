@@ -8,11 +8,13 @@ type Status = { message: string; state: "" | "success" | "error" };
 type FieldElement = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 
 const field =
-  "w-full px-4 py-[0.9rem] border border-line-strong bg-white/85 text-text font-[inherit] mobile:text-base";
+  "w-full px-4 py-[0.9rem] rounded-[1.1rem] border border-line-strong bg-white/85 text-text font-[inherit] mobile:text-base";
 const labelClass =
   "grid gap-[0.45rem] font-serif text-[0.95rem] leading-[1.4]";
 const panel =
   "bg-white/40 border border-line shadow-soft p-6 tablet:p-4";
+const radioCard =
+  "group flex items-center gap-4 rounded-[1.15rem] border border-line-strong bg-white/70 px-4 py-4 cursor-pointer transition-[border-color,background-color,transform,box-shadow] duration-200 hover:border-text/45 hover:bg-white/90 hover:-translate-y-px";
 
 export default function Confirma() {
   useReveal();
@@ -46,6 +48,16 @@ export default function Confirma() {
     setStatus({ message: t.confirma.success, state: "success" });
   };
 
+  const failPending = () => {
+    pendingRef.current = false;
+    if (fallbackRef.current) {
+      window.clearTimeout(fallbackRef.current);
+      fallbackRef.current = null;
+    }
+    setSubmitting(false);
+    setStatus({ message: t.confirma.deliveryPending, state: "error" });
+  };
+
   const onIframeLoad = () => {
     if (!pendingRef.current) return;
     finish();
@@ -53,6 +65,9 @@ export default function Confirma() {
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     const form = event.currentTarget;
+    const confirmation = form.querySelector<HTMLInputElement>(
+      'input[name="confirmacion"]:checked'
+    );
 
     if (!RSVP_ENDPOINT) {
       event.preventDefault();
@@ -66,6 +81,16 @@ export default function Confirma() {
     const empty = required.some((f) => !String(f.value || "").trim());
     if (empty) {
       event.preventDefault();
+      setStatus({ message: t.confirma.missingFields, state: "error" });
+      return;
+    }
+
+    if (!confirmation) {
+      event.preventDefault();
+      const firstRadio = form.querySelector<HTMLInputElement>(
+        'input[name="confirmacion"]'
+      );
+      firstRadio?.focus();
       setStatus({ message: t.confirma.missingFields, state: "error" });
       return;
     }
@@ -85,8 +110,8 @@ export default function Confirma() {
 
     fallbackRef.current = window.setTimeout(() => {
       if (!pendingRef.current) return;
-      finish();
-    }, 2500);
+      failPending();
+    }, 12000);
   };
 
   return (
@@ -139,21 +164,43 @@ export default function Confirma() {
               />
             </label>
 
-            <label className={labelClass}>
-              {t.confirma.attending}
-              <select
-                className={field}
-                name="confirmacion"
-                required
-                defaultValue=""
-                onChange={clearFieldError}
-                onInvalid={showRequiredError}
-              >
-                <option value="">{t.confirma.selectOption}</option>
-                <option value="Si, asistire">{t.confirma.yes}</option>
-                <option value="No podre asistir">{t.confirma.no}</option>
-              </select>
-            </label>
+            <fieldset className="grid gap-3 border-0 p-0 m-0">
+              <legend className="font-serif text-[0.95rem] leading-[1.4] mb-1">
+                {t.confirma.attending}
+              </legend>
+
+              <label className={radioCard}>
+                <input
+                  className="sr-only peer"
+                  type="radio"
+                  name="confirmacion"
+                  value="Si, asistire"
+                  onChange={clearFieldError}
+                />
+                <span className="flex h-5 w-5 items-center justify-center rounded-full border border-line-strong bg-transparent transition-colors duration-200 peer-checked:border-text peer-checked:bg-text/5">
+                  <span className="h-2.5 w-2.5 rounded-full bg-text scale-0 transition-transform duration-200 peer-checked:scale-100" />
+                </span>
+                <span className="font-serif text-[1rem] text-text/90">
+                  {t.confirma.yes}
+                </span>
+              </label>
+
+              <label className={radioCard}>
+                <input
+                  className="sr-only peer"
+                  type="radio"
+                  name="confirmacion"
+                  value="No podre asistir"
+                  onChange={clearFieldError}
+                />
+                <span className="flex h-5 w-5 items-center justify-center rounded-full border border-line-strong bg-transparent transition-colors duration-200 peer-checked:border-text peer-checked:bg-text/5">
+                  <span className="h-2.5 w-2.5 rounded-full bg-text scale-0 transition-transform duration-200 peer-checked:scale-100" />
+                </span>
+                <span className="font-serif text-[1rem] text-text/90">
+                  {t.confirma.no}
+                </span>
+              </label>
+            </fieldset>
 
             <label className={labelClass}>
               {t.confirma.message}
@@ -166,7 +213,7 @@ export default function Confirma() {
             </label>
 
             <button
-              className="inline-flex items-center justify-center min-h-[46px] mt-4 px-[1.35rem] py-[0.82rem] border border-text text-text bg-transparent font-serif text-base cursor-pointer w-full transition-[background-color,color,transform] duration-200 hover:bg-text hover:text-bg hover:-translate-y-px disabled:opacity-70 disabled:cursor-wait"
+              className="inline-flex items-center justify-center min-h-[46px] mt-4 px-[1.35rem] py-[0.82rem] rounded-full border border-text text-text bg-transparent font-serif text-base cursor-pointer w-full transition-[background-color,color,transform] duration-200 hover:bg-text hover:text-bg hover:-translate-y-px disabled:opacity-70 disabled:cursor-wait"
               type="submit"
               disabled={submitting}
             >
