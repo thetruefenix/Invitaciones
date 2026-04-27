@@ -13,19 +13,15 @@ export default function Regalos() {
     <Layout page="regalos" title={t.titles.regalos}>
       <section className="reveal py-12 pb-[4.5rem] tablet:py-8 tablet:pb-12">
         <div className="max-w-[760px] mx-auto mb-8 text-center tablet:mb-[1.4rem]">
-          <p className="m-0 font-serif text-base tracking-[0.01em]">
-            {t.regalos.kicker}
-          </p>
           <h2 className="m-0 font-script font-normal text-[clamp(2.8rem,5vw,4.6rem)] leading-[1.2] mobile:text-[clamp(2.4rem,11vw,3.2rem)]">
             {t.regalos.title}
           </h2>
-          <p className="m-0 font-serif font-normal">{t.regalos.copy}</p>
-          <p className="m-0 mt-4 font-serif italic text-[1.02rem] leading-[1.7] text-text/75">
-            {t.regalos.gentleNote}
+          <p className="m-0 mt-4 font-serif text-[1.02rem] leading-[1.8] text-text/78">
+            {t.regalos.copy}
           </p>
         </div>
 
-        <div className="reveal max-w-[560px] mx-auto rounded-[10px] overflow-hidden shadow-[0_30px_70px_rgba(78,78,78,0.08),0_0_0_1px_#e8e0d8]">
+        <div className="reveal max-w-[560px] mx-auto rounded-[1.6rem] overflow-hidden shadow-[0_30px_70px_rgba(78,78,78,0.08),0_0_0_1px_#e8e0d8]">
           <div className="flex items-center gap-[0.45rem] px-4 py-[0.65rem] bg-[#e8e0d8] border-b border-line-strong">
             <span className="w-[11px] h-[11px] rounded-full flex-shrink-0 bg-[#c2ac97]" />
             <span className="w-[11px] h-[11px] rounded-full flex-shrink-0 bg-[#c2ac97]" />
@@ -66,7 +62,7 @@ export default function Regalos() {
               <p className="m-0 font-serif text-[1.45rem] font-normal italic text-text tablet:text-[1.2rem]">
                 Gabriela &amp; Diego
               </p>
-              <span className="inline-block mt-2 px-[1.4rem] py-[0.6rem] rounded-full border border-text font-serif text-[0.88rem] tracking-[0.04em] transition-colors duration-200">
+              <span className="inline-block mt-2 px-[1.4rem] py-[0.6rem] rounded-full border border-text font-serif text-[0.88rem] tracking-[0.04em] transition-[background-color,color,transform] duration-200 group-hover:bg-text group-hover:text-bg group-hover:-translate-y-px">
                 {t.regalos.previewCta}
               </span>
             </div>

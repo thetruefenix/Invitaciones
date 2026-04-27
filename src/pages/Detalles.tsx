@@ -21,11 +21,18 @@ const bodyStyle = "mt-2 font-serif text-[1.05rem] leading-[1.6] text-text/80";
 const btn = "inline-flex items-center justify-center min-h-[3rem] px-6 py-3 bg-[#5d5957] text-white no-underline font-serif text-[0.98rem] font-bold hover:bg-[#474341] transition-colors tablet:w-full rounded-full text-center";
 const mobileSummaryCard =
   "rounded-[1.7rem] border border-line bg-[linear-gradient(180deg,rgba(255,255,255,0.85),rgba(247,243,238,0.96))] overflow-hidden shadow-[0_20px_50px_rgba(78,78,78,0.06)]";
+const practicalCard =
+  "rounded-[1.45rem] border border-line bg-white/75 px-4 py-5 shadow-[0_18px_45px_rgba(78,78,78,0.05)]";
+const expandBtn =
+  "inline-flex items-center justify-center min-h-[42px] mt-5 px-5 rounded-full border border-text text-text bg-transparent font-serif text-[0.95rem] transition-[background-color,color,transform] duration-200 hover:bg-text hover:text-bg";
+const summaryActionBtn =
+  "inline-flex items-center justify-center min-h-[42px] mt-4 px-5 rounded-full bg-text text-bg font-serif text-[0.94rem] no-underline transition-transform duration-200 hover:-translate-y-px";
 
 export default function Detalles() {
   useReveal();
   const { t } = useLang();
   const [celebrationIndex, setCelebrationIndex] = useState(0);
+  const [usefulIndex, setUsefulIndex] = useState(0);
   const [openMobileSection, setOpenMobileSection] = useState<
     "ceremony" | "celebration" | null
   >(null);
@@ -46,6 +53,37 @@ export default function Detalles() {
     setOpenMobileSection((current) => (current === section ? null : section));
   };
 
+  const previousUsefulItem = () => {
+    setUsefulIndex((current) =>
+      current === 0 ? practicalItems.length - 1 : current - 1
+    );
+  };
+
+  const nextUsefulItem = () => {
+    setUsefulIndex((current) =>
+      current === practicalItems.length - 1 ? 0 : current + 1
+    );
+  };
+
+  const practicalItems = [
+    {
+      label: t.detalles.usefulArrivalLabel,
+      value: t.detalles.usefulArrivalValue,
+    },
+    {
+      label: t.detalles.usefulParkingLabel,
+      value: t.detalles.usefulParkingValue,
+    },
+    {
+      label: t.detalles.usefulDressLabel,
+      value: t.detalles.usefulDressValue,
+    },
+    {
+      label: t.detalles.usefulGuestsLabel,
+      value: t.detalles.usefulGuestsValue,
+    },
+  ];
+
   return (
     <Layout page="detalles" title={t.titles.detalles}>
       <section className="relative max-w-[1100px] mx-auto pt-20 pb-28 tablet:pt-16 tablet:pb-20 mobile:pt-12 mobile:pb-16 px-6 mobile:px-4">
@@ -54,6 +92,76 @@ export default function Detalles() {
           <h1 className="m-0 text-text font-script font-normal text-[clamp(3.5rem,6vw,5.5rem)] leading-[1.1]">
             {t.detalles.titleDate}
           </h1>
+        </div>
+
+        <div className="reveal max-w-[980px] mx-auto mb-16 tablet:mb-12">
+          <div className="text-center mb-6">
+            <p className="m-0 font-serif text-[0.82rem] tracking-[0.16em] uppercase text-text/45">
+              {t.detalles.usefulTitle}
+            </p>
+          </div>
+          <div className="grid grid-cols-4 gap-4 tablet:grid-cols-2 mobile:hidden">
+            {practicalItems.map((item) => (
+              <article className={practicalCard} key={item.label}>
+                <p className="m-0 font-serif text-[0.8rem] tracking-[0.1em] uppercase text-text/55">
+                  {item.label}
+                </p>
+                <p className="m-0 mt-2 font-serif text-[0.98rem] leading-[1.65] text-text/88">
+                  {item.value}
+                </p>
+              </article>
+            ))}
+          </div>
+          <div className="hidden mobile:block max-w-[620px] mx-auto">
+            <div className="relative overflow-hidden rounded-[1.45rem]">
+              <div
+                className="flex transition-transform duration-[500ms] ease-in-out"
+                style={{ transform: `translateX(-${usefulIndex * 100}%)` }}
+              >
+                {practicalItems.map((item) => (
+                  <article className={`flex-[0_0_100%] ${practicalCard}`} key={item.label}>
+                    <p className="m-0 font-serif text-[0.8rem] tracking-[0.1em] uppercase text-text/55">
+                      {item.label}
+                    </p>
+                    <p className="m-0 mt-2 font-serif text-[0.98rem] leading-[1.7] text-text/88">
+                      {item.value}
+                    </p>
+                  </article>
+                ))}
+              </div>
+              <button
+                className="absolute top-1/2 left-3 z-[2] w-9 h-9 border-0 rounded-full bg-text/55 text-white text-xl flex items-center justify-center cursor-pointer -translate-y-1/2 hover:bg-text/80 transition-colors backdrop-blur-sm"
+                type="button"
+                aria-label={t.detalles.prevPhoto}
+                onClick={previousUsefulItem}
+              >
+                &#8249;
+              </button>
+              <button
+                className="absolute top-1/2 right-3 z-[2] w-9 h-9 border-0 rounded-full bg-text/55 text-white text-xl flex items-center justify-center cursor-pointer -translate-y-1/2 hover:bg-text/80 transition-colors backdrop-blur-sm"
+                type="button"
+                aria-label={t.detalles.nextPhoto}
+                onClick={nextUsefulItem}
+              >
+                &#8250;
+              </button>
+              <div className="flex justify-center gap-2 mt-4">
+                {practicalItems.map((item, index) => (
+                  <button
+                    key={item.label}
+                    type="button"
+                    className={`w-2.5 h-2.5 p-0 border-0 rounded-full cursor-pointer transition-all ${
+                      index === usefulIndex
+                        ? "bg-text scale-110"
+                        : "bg-text/25 hover:bg-text/45"
+                    }`}
+                    aria-label={`${t.detalles.goToPhoto} ${index + 1}`}
+                    onClick={() => setUsefulIndex(index)}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="hidden mobile:block max-w-[620px] mx-auto space-y-5">
@@ -67,14 +175,24 @@ export default function Detalles() {
               <p className="m-0 font-serif text-[0.76rem] tracking-[0.14em] uppercase text-text/50">
                 {t.detalles.ceremonyTime}
               </p>
-              <h2 className="m-0 mt-2 font-serif text-[1.9rem] leading-[1.1] text-text">
+              <h2 className="m-0 mt-2 font-serif text-[2rem] leading-[1.05] text-text">
                 {t.detalles.ceremony}
               </h2>
               <p className="m-0 mt-3 font-serif text-[0.98rem] leading-[1.7] text-text/80">
                 {t.detalles.ceremonyPlace}
               </p>
+              <div className="flex flex-wrap gap-3">
+                <a
+                  className={summaryActionBtn}
+                  href="https://maps.app.goo.gl/YuzAGxufDY8RTAY28"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {t.detalles.map}
+                </a>
+              </div>
               <button
-                className="inline-flex items-center justify-center min-h-[42px] mt-5 px-5 rounded-full border border-text text-text bg-transparent font-serif text-[0.95rem] transition-[background-color,color,transform] duration-200 hover:bg-text hover:text-bg"
+                className={expandBtn}
                 type="button"
                 onClick={() => toggleMobileSection("ceremony")}
               >
@@ -98,7 +216,7 @@ export default function Detalles() {
                     </a>
                     <a
                       className={btn}
-                      href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Ceremonia%20Gabriela%20y%20Diego&dates=20270211T193000Z/20270211T210000Z&details=Ceremonia%20de%20matrimonio&location=Calle%20Nueva%201970%2C%20San%20Pedro%20de%20la%20Paz%2C%20Biob%C3%ADo%2C%20Chile"
+                      href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Ceremonia%20Gabriela%20y%20Diego&dates=20270211T194500Z/20270211T210000Z&details=Ceremonia%20de%20matrimonio&location=Calle%20Nueva%201970%2C%20San%20Pedro%20de%20la%20Paz%2C%20Biob%C3%ADo%2C%20Chile"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -177,14 +295,24 @@ export default function Detalles() {
               <p className="m-0 font-serif text-[0.76rem] tracking-[0.14em] uppercase text-text/50">
                 {t.detalles.celebrationTime}
               </p>
-              <h2 className="m-0 mt-2 font-serif text-[1.9rem] leading-[1.1] text-text">
+              <h2 className="m-0 mt-2 font-serif text-[2rem] leading-[1.05] text-text">
                 {t.detalles.celebration}
               </h2>
               <p className="m-0 mt-3 font-serif text-[0.98rem] leading-[1.7] text-text/80">
                 {t.detalles.celebrationPlace}
               </p>
+              <div className="flex flex-wrap gap-3">
+                <a
+                  className={summaryActionBtn}
+                  href="https://maps.app.goo.gl/WTdmvZ7gusrBz3pM9?g_st=ic"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {t.detalles.map}
+                </a>
+              </div>
               <button
-                className="inline-flex items-center justify-center min-h-[42px] mt-5 px-5 rounded-full border border-text text-text bg-transparent font-serif text-[0.95rem] transition-[background-color,color,transform] duration-200 hover:bg-text hover:text-bg"
+                className={expandBtn}
                 type="button"
                 onClick={() => toggleMobileSection("celebration")}
               >
@@ -264,7 +392,7 @@ export default function Detalles() {
                     <a className={btn} href="https://maps.app.goo.gl/YuzAGxufDY8RTAY28" target="_blank" rel="noreferrer">
                       {t.detalles.map}
                     </a>
-                    <a className={btn} href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Ceremonia%20Gabriela%20y%20Diego&dates=20270211T193000Z/20270211T210000Z&details=Ceremonia%20de%20matrimonio&location=Calle%20Nueva%201970%2C%20San%20Pedro%20de%20la%20Paz%2C%20Biob%C3%ADo%2C%20Chile" target="_blank" rel="noreferrer">
+                    <a className={btn} href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Ceremonia%20Gabriela%20y%20Diego&dates=20270211T194500Z/20270211T210000Z&details=Ceremonia%20de%20matrimonio&location=Calle%20Nueva%201970%2C%20San%20Pedro%20de%20la%20Paz%2C%20Biob%C3%ADo%2C%20Chile" target="_blank" rel="noreferrer">
                       {t.detalles.addToCalendar}
                     </a>
                   </div>

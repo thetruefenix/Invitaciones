@@ -8,7 +8,7 @@ import foto2 from "../assets/carrucel/foto-2.jpeg";
 import foto3 from "../assets/carrucel/foto-3.jpeg";
 import foto4 from "../assets/carrucel/foto-4.jpeg";
 
-const WEDDING_DATE = new Date("2027-02-11T16:30:00-03:00");
+const WEDDING_DATE = new Date("2027-02-11T16:45:00-03:00");
 
 const tiles = [foto1, foto2, foto3, foto4, foto1, foto2, foto3, foto4];
 const ghostTiles = [foto1, foto2, foto3, foto4, foto1, foto2, foto3, foto4];
