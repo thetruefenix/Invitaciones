@@ -124,7 +124,7 @@ export default function Confirma() {
           <p className="m-0 font-serif font-normal">{t.confirma.copy}</p>
         </div>
 
-        <div className="reveal grid grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] gap-6 max-w-[980px] mx-auto tablet:grid-cols-1 tablet:gap-4">
+        <div className="reveal max-w-[680px] mx-auto">
           <form
             ref={formRef}
             className={`${panel} grid gap-4`}
@@ -220,54 +220,21 @@ export default function Confirma() {
               {t.confirma.submit}
             </button>
             {status.message ? (
-              <div
-                className="rounded-[1.25rem] border px-4 py-4 font-serif leading-[1.7] data-[state=success]:border-success/35 data-[state=success]:bg-success/10 data-[state=success]:text-success data-[state=error]:border-error/25 data-[state=error]:bg-error/10 data-[state=error]:text-error"
+              <p
+                className="m-0 font-serif leading-[1.7] data-[state=success]:text-success data-[state=error]:text-error"
                 aria-live="polite"
                 {...(status.state ? { "data-state": status.state } : {})}
               >
                 {status.message}
-              </div>
+              </p>
             ) : (
               <div aria-live="polite" className="min-h-2" />
             )}
           </form>
 
-          <div className={`${panel} grid content-start gap-4`}>
-            {status.state === "success" ? (
-              <div className="rounded-[1.5rem] border border-success/20 bg-success/10 px-5 py-6">
-                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-success/15 text-success text-[1.4rem]">
-                  &#10003;
-                </div>
-                <h3 className="m-0 mt-4 font-serif text-[1.25rem] leading-[1.3]">
-                  {t.confirma.successTitle}
-                </h3>
-                <p className="m-0 mt-3 font-serif leading-[1.75] text-text/85">
-                  {t.confirma.successCopy}
-                </p>
-                <p className="m-0 mt-3 font-serif italic leading-[1.7] text-text/72">
-                  {t.confirma.successNote}
-                </p>
-              </div>
-            ) : (
-              <>
-                <h3 className="m-0 mb-3 font-serif text-[1.1rem]">
-                  {t.confirma.helpTitle}
-                </h3>
-                <p className="m-0 font-serif leading-[1.7]">{t.confirma.helpCopy}</p>
-              </>
-            )}
-          </div>
-        </div>
-
-        <div className="reveal max-w-[760px] mx-auto mt-10">
-          <div className="rounded-[1.8rem] border border-line bg-[linear-gradient(180deg,rgba(255,255,255,0.76),rgba(247,243,238,0.94))] px-7 py-7 text-center shadow-[0_18px_45px_rgba(78,78,78,0.05)]">
-            <p className="m-0 font-script text-[clamp(2rem,4vw,3rem)] leading-[1.1] text-text/86">
-              {t.confirma.farewellTitle}
-            </p>
-            <p className="m-0 mt-3 font-serif text-[1rem] leading-[1.8] text-text/78">
-              {t.confirma.farewellCopy}
-            </p>
-          </div>
+          <p className="m-0 mt-6 text-center font-serif text-[1rem] leading-[1.8] text-text/72">
+            {t.confirma.farewellCopy}
+          </p>
         </div>
 
         <iframe

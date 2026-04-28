@@ -108,7 +108,7 @@ type Dict = {
     farewellCopy: string;
     iframeTitle: string;
   };
-  footer: { line1: string; line2: string };
+  footer: { line1: string; cite: string; line2: string };
   guide: { home: string; detalles: string; regalos: string };
   titles: {
     home: string;
@@ -201,7 +201,7 @@ export const translations: Record<Lang, Dict> = {
       kicker: "Regalos",
       title: "Lista de novios",
       copy:
-        "Su compañía en este día tan especial es nuestro mejor regalo, y si además desean tener un detalle con nosotros, aquí podrán encontrar nuestra lista.",
+        "Si desean hacernos un regalo, aqui encontraran nuestra lista en Falabella.",
       leadLine: "Su compañía es el mejor regalo para nosotros.",
       gentleNote:
         "Y si además quieren tener un detalle con nosotros, preparamos esta lista con mucho cariño.",
@@ -250,12 +250,12 @@ export const translations: Record<Lang, Dict> = {
       helpCopy:
         "Cada persona que nos acompaña forma parte de esta historia, y tu presencia haría este día todavía más especial para nosotros.",
       farewellTitle: "Con amor, Gabriela & Diego",
-      farewellCopy:
-        "Gracias por tomarte un momento para confirmar. Nos ilusiona compartir este día contigo.",
+      farewellCopy: "Gracias por tomarte el tiempo para confirmar.",
       iframeTitle: "Envío RSVP",
     },
     footer: {
-      line1: "Su compañía en este día tan especial es nuestro mejor regalo.",
+      line1: "Y sobre todas estas cosas vestíos de amor, que es el vínculo perfecto.",
+      cite: "Colosenses 3:14",
       line2: "Gabriela & Diego",
     },
     guide: {
@@ -354,7 +354,7 @@ export const translations: Record<Lang, Dict> = {
       kicker: "Gifts",
       title: "Wedding registry",
       copy:
-        "Your presence on this special day is the greatest gift to us, and if you would also like to bless us with a little something, you can find our registry here.",
+        "If you would like to give us a gift, you will find our Falabella registry here.",
       leadLine: "Your presence is truly the best gift for us.",
       gentleNote:
         "And if you would also like to treat us to something special, we lovingly put together this registry.",
@@ -401,12 +401,12 @@ export const translations: Record<Lang, Dict> = {
       helpCopy:
         "Every person who joins us is part of this story, and your presence would make this day even more special for us.",
       farewellTitle: "With love, Gabriela & Diego",
-      farewellCopy:
-        "Thank you for taking a moment to RSVP. We are excited to share this day with you.",
+      farewellCopy: "Thank you for taking the time to RSVP.",
       iframeTitle: "RSVP submission",
     },
     footer: {
-      line1: "Your presence on this special day is the greatest gift to us.",
+      line1: "And over all these virtues put on love, which binds them all together.",
+      cite: "Colossians 3:14",
       line2: "Gabriela & Diego",
     },
     guide: {
