@@ -166,62 +166,71 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="grid grid-cols-3 gap-4 mt-10 tablet:gap-3 tablet:mt-8 mobile:grid-cols-1">
-            {[
-              {
-                label: t.home.summaryCeremonyLabel,
-                value: t.home.summaryCeremonyValue,
-              },
-              {
-                label: t.home.summaryCelebrationLabel,
-                value: t.home.summaryCelebrationValue,
-              },
-              {
-                label: t.home.summaryDressLabel,
-                value: t.home.summaryDressValue,
-              },
-            ].map((item) => (
-              <div
-                key={item.label}
-                className="rounded-[1.4rem] border border-line bg-white/70 px-4 py-5 shadow-[0_18px_45px_rgba(78,78,78,0.06)]"
-              >
-                <p className="m-0 font-serif text-[0.8rem] tracking-[0.1em] uppercase text-text/55">
-                  {item.label}
-                </p>
-                <p className="m-0 mt-2 font-serif text-[0.98rem] leading-[1.55] text-text/90">
-                  {item.value}
-                </p>
+          <div className="relative w-screen ml-[calc(50%-50vw)] mt-10 py-16 overflow-hidden">
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url(${foto1})` }}
+            />
+            <div className="absolute inset-0 bg-black/60" />
+            <div className="relative z-10 w-[min(1180px,calc(100%-2rem))] max-w-[760px] mx-auto px-4">
+              <div className="grid grid-cols-3 gap-4 tablet:gap-3 mobile:grid-cols-1">
+                {[
+                  {
+                    label: t.home.summaryCeremonyLabel,
+                    value: t.home.summaryCeremonyValue,
+                  },
+                  {
+                    label: t.home.summaryCelebrationLabel,
+                    value: t.home.summaryCelebrationValue,
+                  },
+                  {
+                    label: t.home.summaryDressLabel,
+                    value: t.home.summaryDressValue,
+                  },
+                ].map((item) => (
+                  <div
+                    key={item.label}
+                    className="rounded-[1.4rem] border border-line bg-white/70 px-4 py-5 shadow-[0_18px_45px_rgba(78,78,78,0.06)]"
+                  >
+                    <p className="m-0 font-serif text-[0.8rem] tracking-[0.1em] uppercase text-text/55">
+                      {item.label}
+                    </p>
+                    <p className="m-0 mt-2 font-serif text-[0.98rem] leading-[1.55] text-text/90">
+                      {item.value}
+                    </p>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
 
-          <div className="mt-12 tablet:mt-10">
-            <p className="m-0 text-center font-serif text-[0.82rem] tracking-[0.16em] uppercase text-text/45">
-              {t.home.scriptureTitle}
-            </p>
-            <div className="grid grid-cols-2 gap-4 mt-4 mobile:grid-cols-1">
-              {[
-                {
-                  verse: t.home.scriptureOne,
-                  ref: t.home.scriptureOneRef,
-                },
-                {
-                  verse: t.home.scriptureTwo,
-                  ref: t.home.scriptureTwoRef,
-                },
-              ].map((item) => (
-                <blockquote
-                  key={item.ref}
-                  className="m-0 rounded-[1.6rem] border border-line bg-[linear-gradient(180deg,rgba(255,255,255,0.78),rgba(247,243,238,0.92))] px-5 py-6 text-left shadow-[0_18px_45px_rgba(78,78,78,0.05)]"
-                >
-                  <p className="m-0 font-serif italic text-[1rem] leading-[1.7] text-text/85">
-                    "{item.verse}"
-                  </p>
-                  <footer className="mt-3 font-serif text-[0.88rem] tracking-[0.08em] uppercase text-text/55">
-                    {item.ref}
-                  </footer>
-                </blockquote>
-              ))}
+              <div className="mt-12 tablet:mt-10">
+                <p className="m-0 text-center font-serif text-[0.82rem] tracking-[0.16em] uppercase text-white/70">
+                  {t.home.scriptureTitle}
+                </p>
+                <div className="grid grid-cols-2 gap-4 mt-4 mobile:grid-cols-1">
+                  {[
+                    {
+                      verse: t.home.scriptureOne,
+                      ref: t.home.scriptureOneRef,
+                    },
+                    {
+                      verse: t.home.scriptureTwo,
+                      ref: t.home.scriptureTwoRef,
+                    },
+                  ].map((item) => (
+                    <blockquote
+                      key={item.ref}
+                      className="m-0 rounded-[1.6rem] border border-line bg-[linear-gradient(180deg,rgba(255,255,255,0.78),rgba(247,243,238,0.92))] px-5 py-6 text-left shadow-[0_18px_45px_rgba(78,78,78,0.05)]"
+                    >
+                      <p className="m-0 font-serif italic text-[1rem] leading-[1.7] text-text/85">
+                        "{item.verse}"
+                      </p>
+                      <footer className="mt-3 font-serif text-[0.88rem] tracking-[0.08em] uppercase text-text/55">
+                        {item.ref}
+                      </footer>
+                    </blockquote>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
