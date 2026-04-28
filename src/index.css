@@ -7,12 +7,12 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   body {
     @apply bg-bg text-text font-serif;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   img,

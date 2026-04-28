@@ -55,7 +55,7 @@ export default function Layout({ page, title, children }: LayoutProps) {
   return (
     <>
       <Header />
-      <main className="container-narrow">{children}</main>
+      <main className="container-narrow pt-[74px] tablet:pt-[64px]">{children}</main>
       <Footer />
       {nextStep && showGuideButton ? (
         <Link

@@ -38,12 +38,11 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b border-[rgba(232,224,216,0.75)] backdrop-blur-md transition-all duration-300 ${
-        scrolled || isOpen ? "bg-[rgba(247,245,242,0.95)] shadow-topbar" : "bg-[rgba(247,245,242,0.82)]"
-      }`}
+      className={`fixed top-0 left-0 right-0 w-full z-50 border-b border-[rgba(232,224,216,0.75)] backdrop-blur-md transition-all duration-300 ${scrolled || isOpen ? "bg-[rgba(247,245,242,0.95)] shadow-topbar" : "bg-[rgba(247,245,242,0.82)]"
+        }`}
     >
       <div className="container-narrow h-[74px] flex items-center justify-between gap-4 tablet:h-[64px]">
-        
+
         {/* Logo */}
         <Link
           className="font-script text-[2.5rem] leading-none whitespace-nowrap no-underline text-text tablet:text-[2.2rem] relative z-20"
@@ -89,10 +88,9 @@ export default function Header() {
       </div>
 
       {/* Mobile Menu Dropdown */}
-      <div 
-        className={`absolute top-[100%] left-0 w-full bg-[rgba(247,245,242,0.98)] backdrop-blur-xl border-b border-[rgba(232,224,216,0.75)] shadow-soft transition-all duration-300 ease-in-out overflow-hidden hidden tablet:block ${
-          isOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0 pointer-events-none"
-        }`}
+      <div
+        className={`absolute top-[100%] left-0 w-full bg-[rgba(247,245,242,0.98)] backdrop-blur-xl border-b border-[rgba(232,224,216,0.75)] shadow-soft transition-all duration-300 ease-in-out overflow-hidden hidden tablet:block ${isOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0 pointer-events-none"
+          }`}
       >
         <div className="flex flex-col items-center py-6 px-4 gap-6">
           <nav className="flex flex-col items-center gap-5 w-full">
@@ -109,9 +107,9 @@ export default function Header() {
               </NavLink>
             ))}
           </nav>
-          
+
           <div className="w-12 h-px bg-line-strong my-1"></div>
-          
+
           <LanguageToggle />
         </div>
       </div>
