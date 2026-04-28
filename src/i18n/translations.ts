@@ -130,7 +130,7 @@ export const translations: Record<Lang, Dict> = {
     },
     intro: {
       title: "Te invitamos a nuestro matrimonio",
-      warning: "Esta invitación es personal e intransferible",
+      warning: "Esta invitación es personal",
     },
     home: {
       heroScript: "we're getting married!",
