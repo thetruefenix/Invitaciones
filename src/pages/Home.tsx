@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type CSSProperties } from "react";
 import Layout from "../components/Layout";
 import useCountdown from "../hooks/useCountdown";
 import useReveal from "../hooks/useReveal";
@@ -26,6 +26,11 @@ export default function Home() {
   useReveal();
   const { t } = useLang();
   const summaryRef = useRef<HTMLDivElement>(null);
+  const timelineStyle = {
+    "--timeline-col": "clamp(2.8rem, 14vw, 4.6rem)",
+    "--timeline-icon": "clamp(3rem, 16vw, 4rem)",
+    "--timeline-text": "min(100%, 14rem)",
+  } as CSSProperties;
   const eventCards = [
     {
       time: t.detalles.ceremonyTime,
@@ -182,35 +187,38 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="mt-12 max-w-[320px] mx-auto tablet:mt-9">
-            <p className="m-0 font-serif text-[0.9rem] tracking-[0.16em] uppercase text-text/55">
+          <div className="mt-12 w-[min(100%,20rem)] mx-auto tablet:mt-9 mobile:w-[min(100%,17.5rem)]">
+            <p className="m-0 font-serif text-[0.9rem] tracking-[0.16em] uppercase text-text/55 mobile:text-[0.8rem]">
               {t.home.timelineTitle}
             </p>
-            <div className="relative mt-6 mx-auto grid max-w-[320px] gap-6 text-center">
+            <div
+              className="relative mt-6 mx-auto grid w-full gap-6 text-center mobile:mt-5 mobile:gap-5"
+              style={timelineStyle}
+            >
               <div
-                className="absolute -left-[2.6rem] top-4 bottom-4 w-px bg-line-strong/85"
+                className="absolute left-[calc(var(--timeline-col)/2)] top-4 bottom-4 w-px -translate-x-1/2 bg-line-strong/85 mobile:top-3 mobile:bottom-3"
                 aria-hidden="true"
               />
               {eventCards.map((item) => (
                 <div
                   key={item.label}
-                  className="relative mx-auto min-h-[5.8rem] w-full"
+                  className="relative mx-auto min-h-[5.8rem] w-full mobile:min-h-[4.8rem]"
                 >
                   <span
-                    className="absolute -left-[4.55rem] top-0 z-[1] flex h-16 w-16 items-center justify-center bg-bg shadow-[0_0_0_8px_rgba(247,245,242,0.96)]"
+                    className="absolute left-[calc(var(--timeline-col)/2)] top-[0.05rem] z-[1] flex h-[var(--timeline-icon)] w-[var(--timeline-icon)] -translate-x-1/2 items-center justify-center bg-bg shadow-[0_0_0_8px_rgba(247,245,242,0.96)] mobile:bg-transparent mobile:shadow-none"
                     aria-hidden="true"
                   >
                     <img
                       src={item.image}
                       alt={item.alt}
-                      className="h-16 w-16 object-contain opacity-85 grayscale"
+                      className="h-[var(--timeline-icon)] w-[var(--timeline-icon)] object-contain opacity-85 grayscale"
                     />
                   </span>
                   <div className="w-full pt-[0.05rem] text-center">
-                    <p className="m-0 font-serif text-[1.05rem] font-bold text-text">
+                    <p className="m-0 font-serif text-[1.05rem] font-bold text-text mobile:text-[0.94rem]">
                       {item.time}
                     </p>
-                    <p className="m-0 mt-1 font-serif text-[1.2rem] leading-[1.45] text-text/78">
+                    <p className="m-0 mt-1 font-serif text-[1.2rem] leading-[1.45] text-text/78 mobile:text-[1.02rem]">
                       {item.label}
                     </p>
                   </div>
