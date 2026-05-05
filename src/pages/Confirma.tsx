@@ -27,6 +27,7 @@ export default function Confirma() {
 
   const [status, setStatus] = useState<Status>({ message: "", state: "" });
   const [submitting, setSubmitting] = useState(false);
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
 
   const clearFieldError = (event: FormEvent<FieldElement>) => {
     event.currentTarget.setCustomValidity("");
@@ -46,6 +47,7 @@ export default function Confirma() {
     setSubmitting(false);
     formRef.current?.reset();
     setStatus({ message: t.confirma.success, state: "success" });
+    setShowSuccessDialog(true);
   };
 
   const failPending = () => {
@@ -71,6 +73,7 @@ export default function Confirma() {
 
     if (!RSVP_ENDPOINT) {
       event.preventDefault();
+      setShowSuccessDialog(false);
       setStatus({ message: t.confirma.missingEndpoint, state: "error" });
       return;
     }
@@ -81,12 +84,14 @@ export default function Confirma() {
     const empty = required.some((f) => !String(f.value || "").trim());
     if (empty) {
       event.preventDefault();
+      setShowSuccessDialog(false);
       setStatus({ message: t.confirma.missingFields, state: "error" });
       return;
     }
 
     if (!confirmation) {
       event.preventDefault();
+      setShowSuccessDialog(false);
       const firstRadio = form.querySelector<HTMLInputElement>(
         'input[name="confirmacion"]'
       );
@@ -97,6 +102,7 @@ export default function Confirma() {
 
     if (!form.checkValidity()) {
       event.preventDefault();
+      setShowSuccessDialog(false);
       form.reportValidity();
       setStatus({ message: t.confirma.invalidFields, state: "error" });
       return;
@@ -106,6 +112,7 @@ export default function Confirma() {
     pendingRef.current = true;
     if (fallbackRef.current) window.clearTimeout(fallbackRef.current);
     setSubmitting(true);
+    setShowSuccessDialog(false);
     setStatus({ message: t.confirma.sending, state: "" });
 
     fallbackRef.current = window.setTimeout(() => {
@@ -244,6 +251,36 @@ export default function Confirma() {
           title={t.confirma.iframeTitle}
           onLoad={onIframeLoad}
         />
+        {showSuccessDialog ? (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-text/25 px-4 backdrop-blur-sm"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="rsvp-success-title"
+          >
+            <div className="w-full max-w-[460px] rounded-[1.8rem] border border-line bg-surface px-7 py-8 text-center shadow-soft">
+              <h3
+                id="rsvp-success-title"
+                className="m-0 font-script text-[clamp(2.4rem,6vw,3.5rem)] font-normal leading-[1.1] text-text"
+              >
+                {t.confirma.successTitle}
+              </h3>
+              <p className="m-0 mt-4 font-serif text-[1rem] leading-[1.8] text-text/78">
+                {t.confirma.successCopy}
+              </p>
+              <p className="m-0 mt-3 font-serif text-[0.92rem] italic leading-[1.7] text-text/65">
+                {t.confirma.successNote}
+              </p>
+              <button
+                className="mt-6 inline-flex min-h-[44px] items-center justify-center rounded-full border border-text bg-transparent px-8 py-2 font-serif text-[0.95rem] text-text transition-[background-color,color,transform] duration-200 hover:-translate-y-px hover:bg-text hover:text-bg"
+                type="button"
+                onClick={() => setShowSuccessDialog(false)}
+              >
+                {t.confirma.successClose}
+              </button>
+            </div>
+          </div>
+        ) : null}
       </section>
     </Layout>
   );

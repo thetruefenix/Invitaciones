@@ -7,6 +7,8 @@ import foto1 from "../assets/carrucel/foto-1.jpeg";
 import foto2 from "../assets/carrucel/foto-2.jpeg";
 import foto3 from "../assets/carrucel/foto-3.jpeg";
 import foto4 from "../assets/carrucel/foto-4.jpeg";
+import emojiCeremonia from "../emoji iglesia.png";
+import emojiCelebracion from "../emoji celebración.png";
 
 const WEDDING_DATE = new Date("2027-02-11T16:45:00-03:00");
 
@@ -24,6 +26,20 @@ export default function Home() {
   useReveal();
   const { t } = useLang();
   const summaryRef = useRef<HTMLDivElement>(null);
+  const eventCards = [
+    {
+      time: t.detalles.ceremonyTime,
+      label: t.detalles.ceremony,
+      image: emojiCeremonia,
+      alt: "Emoji ceremonia",
+    },
+    {
+      time: t.home.timelineCelebrationTime,
+      label: t.detalles.celebration,
+      image: emojiCelebracion,
+      alt: "Emoji celebracion",
+    },
+  ];
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia(
@@ -164,6 +180,43 @@ export default function Home() {
                 </span>
               </div>
             ))}
+          </div>
+
+          <div className="mt-12 max-w-[320px] mx-auto tablet:mt-9">
+            <p className="m-0 font-serif text-[0.9rem] tracking-[0.16em] uppercase text-text/55">
+              {t.home.timelineTitle}
+            </p>
+            <div className="relative mt-6 mx-auto grid max-w-[320px] gap-6 text-center">
+              <div
+                className="absolute -left-[2.6rem] top-4 bottom-4 w-px bg-line-strong/85"
+                aria-hidden="true"
+              />
+              {eventCards.map((item) => (
+                <div
+                  key={item.label}
+                  className="relative mx-auto min-h-[5.8rem] w-full"
+                >
+                  <span
+                    className="absolute -left-[4.55rem] top-0 z-[1] flex h-16 w-16 items-center justify-center bg-bg shadow-[0_0_0_8px_rgba(247,245,242,0.96)]"
+                    aria-hidden="true"
+                  >
+                    <img
+                      src={item.image}
+                      alt={item.alt}
+                      className="h-16 w-16 object-contain opacity-85 grayscale"
+                    />
+                  </span>
+                  <div className="w-full pt-[0.05rem] text-center">
+                    <p className="m-0 font-serif text-[1.05rem] font-bold text-text">
+                      {item.time}
+                    </p>
+                    <p className="m-0 mt-1 font-serif text-[1.2rem] leading-[1.45] text-text/78">
+                      {item.label}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
         </div>

@@ -23,6 +23,15 @@ type Dict = {
     hours: string;
     minutes: string;
     seconds: string;
+    timelineTitle: string;
+    timelineCeremonyTime: string;
+    timelineCeremonyLabel: string;
+    timelineCelebrationTime: string;
+    timelineCelebrationLabel: string;
+    timelineDinnerTime: string;
+    timelineDinnerLabel: string;
+    timelinePartyTime: string;
+    timelinePartyLabel: string;
   };
   detalles: {
     titleDate: string;
@@ -92,6 +101,7 @@ type Dict = {
     successTitle: string;
     successCopy: string;
     successNote: string;
+    successClose: string;
     missingEndpoint: string;
     missingFields: string;
     requiredField: string;
@@ -154,6 +164,15 @@ export const translations: Record<Lang, Dict> = {
       hours: "horas",
       minutes: "minutos",
       seconds: "segundos",
+      timelineTitle: "Cronograma",
+      timelineCeremonyTime: "4:45 pm",
+      timelineCeremonyLabel: "Ceremonia en la iglesia",
+      timelineCelebrationTime: "Desde las 6:00 pm",
+      timelineCelebrationLabel: "Llegada a PuraLodge",
+      timelineDinnerTime: "8:30 pm",
+      timelineDinnerLabel: "Cena y brindis",
+      timelinePartyTime: "10:00 pm",
+      timelinePartyLabel: "Fiesta junto a ustedes",
     },
     detalles: {
       titleDate: "Jueves, 11 de Febrero, 2027",
@@ -233,6 +252,7 @@ export const translations: Record<Lang, Dict> = {
         "Tu respuesta ya quedó registrada y nos ayuda mucho a preparar este día con cariño.",
       successNote:
         "Si quieres, puedes volver a recorrer la invitación y revisar los detalles del evento.",
+      successClose: "Entendido",
       missingEndpoint: "Falta configurar el endpoint del formulario.",
       missingFields: "Completa los campos obligatorios antes de enviar.",
       requiredField: "Completa este campo antes de enviar.",
@@ -307,6 +327,15 @@ export const translations: Record<Lang, Dict> = {
       hours: "hours",
       minutes: "minutes",
       seconds: "seconds",
+      timelineTitle: "Schedule",
+      timelineCeremonyTime: "4:45 pm",
+      timelineCeremonyLabel: "Ceremony at the church",
+      timelineCelebrationTime: "From 6:00 pm",
+      timelineCelebrationLabel: "Arrival at PuraLodge",
+      timelineDinnerTime: "8:30 pm",
+      timelineDinnerLabel: "Dinner and toast",
+      timelinePartyTime: "10:00 pm",
+      timelinePartyLabel: "Celebration with you",
     },
     detalles: {
       titleDate: "Thursday, February 11, 2027",
@@ -385,6 +414,7 @@ export const translations: Record<Lang, Dict> = {
         "Your reply has been recorded and helps us prepare this day with care.",
       successNote:
         "If you would like, you can continue exploring the invitation and event details.",
+      successClose: "Got it",
       missingEndpoint: "The form endpoint is not configured.",
       missingFields: "Please complete the required fields before sending.",
       requiredField: "Complete this field before sending.",
