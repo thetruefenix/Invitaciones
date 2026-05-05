@@ -195,10 +195,6 @@ export default function Home() {
               className="relative mt-6 mx-auto grid w-full gap-6 text-center mobile:mt-5 mobile:gap-5"
               style={timelineStyle}
             >
-              <div
-                className="absolute left-[calc(var(--timeline-col)/2)] top-4 bottom-4 w-px -translate-x-1/2 bg-line-strong/85 mobile:top-3 mobile:bottom-3"
-                aria-hidden="true"
-              />
               {eventCards.map((item) => (
                 <div
                   key={item.label}
