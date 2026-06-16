@@ -1,6 +1,6 @@
 let audioInstance: HTMLAudioElement | null = null;
 let listenersAttached = false;
-let shouldResumeWhenVisible = false;
+let shouldResumeWhenActive = false;
 
 function playAudio(audio: HTMLAudioElement) {
   audio.play().catch((err) => {
@@ -10,13 +10,13 @@ function playAudio(audio: HTMLAudioElement) {
 
 function pauseForInactivePage() {
   if (!audioInstance || audioInstance.paused) return;
-  shouldResumeWhenVisible = true;
+  shouldResumeWhenActive = true;
   audioInstance.pause();
 }
 
 function resumeForActivePage() {
-  if (!audioInstance || !shouldResumeWhenVisible || document.hidden) return;
-  shouldResumeWhenVisible = false;
+  if (!audioInstance || !shouldResumeWhenActive || document.hidden) return;
+  shouldResumeWhenActive = false;
   playAudio(audioInstance);
 }
 
@@ -34,8 +34,10 @@ function attachVisibilityListeners() {
 
   window.addEventListener("pagehide", pauseForInactivePage);
   window.addEventListener("blur", pauseForInactivePage);
+  window.addEventListener("freeze", pauseForInactivePage);
   window.addEventListener("pageshow", resumeForActivePage);
   window.addEventListener("focus", resumeForActivePage);
+  window.addEventListener("beforeunload", pauseForInactivePage);
 }
 
 function ensureAudio(src: string, volume: number, loop: boolean) {
@@ -56,6 +58,6 @@ export function preloadAudio(src: string, volume = 0.1, loop = true) {
 
 export function startAudio(src: string, volume = 0.1, loop = true) {
   const audio = ensureAudio(src, volume, loop);
-  shouldResumeWhenVisible = false;
+  shouldResumeWhenActive = false;
   playAudio(audio);
 }
