@@ -150,7 +150,7 @@ export const translations: Record<Lang, Dict> = {
       summaryCeremonyLabel: "Ceremonia",
       summaryCeremonyValue: "4:45 pm en la iglesia",
       summaryCelebrationLabel: "Celebración",
-      summaryCelebrationValue: "Desde las 6:00 pm en PuraLodge",
+      summaryCelebrationValue: "Desde las 6:30 pm en PuraLodge",
       summaryDressLabel: "Dress code",
       summaryDressValue: "Formal / Etiqueta opcional",
       scriptureTitle: "Versículos para este día",
@@ -167,7 +167,7 @@ export const translations: Record<Lang, Dict> = {
       timelineTitle: "Cronograma",
       timelineCeremonyTime: "4:45 pm",
       timelineCeremonyLabel: "Ceremonia en la iglesia",
-      timelineCelebrationTime: "Desde las 6:00 pm",
+      timelineCelebrationTime: "Desde las 6:30 pm",
       timelineCelebrationLabel: "Llegada a PuraLodge",
       timelineDinnerTime: "8:30 pm",
       timelineDinnerLabel: "Cena y brindis",
@@ -183,7 +183,7 @@ export const translations: Record<Lang, Dict> = {
       dressCodeFormal: "Código de vestimenta Formal / Etiqueta opcional",
       celebration: "Celebración",
       celebrationTime:
-        "Jue, 11 Feb 2027, 6:00 pm - Vie, 12 Feb 2027, 4:00 am",
+        "Jue, 11 Feb 2027, 6:30 pm - Vie, 12 Feb 2027, 4:00 am",
       celebrationPlace: "Centro de eventos PuraLodge",
       celebrationAddress:
         "Callejón Lagunillas 5385, San Pedro de la Paz, Biobío, Chile",
@@ -313,7 +313,7 @@ export const translations: Record<Lang, Dict> = {
       summaryCeremonyLabel: "Ceremony",
       summaryCeremonyValue: "4:45 pm at the church",
       summaryCelebrationLabel: "Celebration",
-      summaryCelebrationValue: "From 6:00 pm at PuraLodge",
+      summaryCelebrationValue: "From 6:30 pm at PuraLodge",
       summaryDressLabel: "Dress code",
       summaryDressValue: "Formal / Black tie optional",
       scriptureTitle: "Verses for this day",
@@ -330,7 +330,7 @@ export const translations: Record<Lang, Dict> = {
       timelineTitle: "Schedule",
       timelineCeremonyTime: "4:45 pm",
       timelineCeremonyLabel: "Ceremony at the church",
-      timelineCelebrationTime: "From 6:00 pm",
+      timelineCelebrationTime: "From 6:30 pm",
       timelineCelebrationLabel: "Arrival at PuraLodge",
       timelineDinnerTime: "8:30 pm",
       timelineDinnerLabel: "Dinner and toast",
@@ -346,7 +346,7 @@ export const translations: Record<Lang, Dict> = {
       dressCodeFormal: "Dress code: Formal / Black tie optional",
       celebration: "Celebration",
       celebrationTime:
-        "Thu, Feb 11, 2027, 6:00 pm - Fri, Feb 12, 2027, 4:00 am",
+        "Thu, Feb 11, 2027, 6:30 pm - Fri, Feb 12, 2027, 4:00 am",
       celebrationPlace: "PuraLodge Event Center",
       celebrationAddress:
         "Lagunillas Alley 5385, San Pedro de la Paz, Biobío, Chile",

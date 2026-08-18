@@ -201,7 +201,7 @@ export default function Home() {
                   className="relative mx-auto min-h-[5.8rem] w-full mobile:min-h-[4.8rem]"
                 >
                   <span
-                    className="absolute left-[calc(var(--timeline-col)/2)] top-[0.05rem] z-[1] flex h-[var(--timeline-icon)] w-[var(--timeline-icon)] -translate-x-1/2 items-center justify-center bg-bg shadow-[0_0_0_8px_rgba(247,245,242,0.96)] mobile:bg-transparent mobile:shadow-none"
+                    className="absolute left-[calc(var(--timeline-col)/2)] top-[0.05rem] z-[1] flex h-[var(--timeline-icon)] w-[var(--timeline-icon)] -translate-x-1/2 items-center justify-center bg-bg shadow-[0_0_0_8px_rgba(247,245,242,0.96)] tablet:left-4 mobile:bg-transparent mobile:shadow-none"
                     aria-hidden="true"
                   >
                     <img
